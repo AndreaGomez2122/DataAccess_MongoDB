@@ -26,9 +26,8 @@ import java.util.Set;
         private Set<Proyecto> proyectos_activos;
         private Set<Programador> historico_jefes;
 
-        public Departamento(String nombre, Programador jefe, double presupuesto) {
+        public Departamento(String nombre, double presupuesto) {
             this.nombre = nombre;
-            this.jefe =jefe;
             this.presupuesto=presupuesto;
             proyectos_terminados = new HashSet<Proyecto>();
             proyectos_activos = new HashSet<Proyecto>();
@@ -59,18 +58,21 @@ import java.util.Set;
         }
 
 
-        @OneToOne
-        @JoinColumn(name = "jefe_id", referencedColumnName = "id", nullable = false)
-        public Programador getJefe() {
-            return jefe;
-        }
+        //El jefe no puede participar en ningun proyecto
+    @ManyToOne
+    @JoinColumn(name = "jefe_id", referencedColumnName = "id", nullable = false)
+    public Programador getJefe() {
+        return jefe;
+    }
 
-        public void setJefe(Programador jefe) {
-            this.jefe = jefe;
-        }
+    public void setJefe(Programador jefe) {
+        this.jefe = jefe;
+    }
 
-        // Pongo EAGER porque están en contexto diferentes y debememos conseguirlo
-        @OneToMany(fetch = FetchType.EAGER, mappedBy = "departamento", cascade = CascadeType.REMOVE) // cascade = CascadeType.ALL
+
+
+    // Pongo EAGER porque están en contexto diferentes y debememos conseguirlo
+        @OneToMany(fetch = FetchType.EAGER, mappedBy = "departamento", cascade = CascadeType.PERSIST) // cascade = CascadeType.ALL
         public Set<Proyecto> getProyectos_terminados() {
             return proyectos_terminados;
         }
@@ -81,7 +83,7 @@ import java.util.Set;
 
 
         // Pongo EAGER porque están en contexto diferentes y debememos conseguirlo
-        @OneToMany(fetch = FetchType.EAGER, mappedBy = "departamento", cascade = CascadeType.REMOVE) // cascade = CascadeType.ALL
+        @OneToMany(fetch = FetchType.EAGER, mappedBy = "departamento", cascade = CascadeType.PERSIST) // cascade = CascadeType.ALL
         public Set<Proyecto> getProyectos_activos() {
             return proyectos_activos;
         }
@@ -112,4 +114,4 @@ import java.util.Set;
 
 
 
-}
+

@@ -3,7 +3,11 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
 import dao.Departamento;
+import dao.Programador;
+import dao.Tecnologia;
 import manager.HibernateController;
+
+import java.util.*;
 
 public class AccesData {
 
@@ -25,62 +29,42 @@ public class AccesData {
         removeData();
 
         HibernateController hc = HibernateController.getInstance();
+
+
+
+
         hc.open();
         // Departamentos
-        hc.getTransaction().begin();
-
         System.out.println("Insertando Departamentos de Ejemplo");
 
         hc.getTransaction().begin();
-        Post p1 = new Post("Post num 1", "http://post1.com", "Este es el post num 1", u1, c1); //10
 
+        Departamento d1 = new Departamento("Recursos humanos",2000000);
+        Departamento d2 = new Departamento("Diseño gráfico",50000);
+        hc.getManager().persist(d1);
+        hc.getManager().persist(d2);
+
+        hc.getTransaction().commit();
+
+        // Programadores
+        System.out.println("Insertando Programadores de Ejemplo");
+        hc.getTransaction().begin();
+        Programador p1 = new Programador("Andrea", new Date("25-10-2020"), d1,new HashSet<Tecnologia>(Arrays.asList(Tecnologia.JAVA,Tecnologia.ANGULAR)),2000,"1234");
+        Programador p2 = new Programador("Jose", new Date("25-10-2020"), d2,new HashSet<Tecnologia>(Arrays.asList(Tecnologia.WORDPRESS,Tecnologia.ANGULAR)),1500,"1234");
 
         hc.getManager().persist(p1);
-
-
-        hc.getTransaction().commit();
-
-
-        // Usuarios
-        System.out.println("Insertando Usuarios de Ejemplo");
-
-        hc.getTransaction().begin();
-        User u1 = new User("Pepe Perez","pepe@pepe.es","1234"); // 5
-        User u2 = new User("Ana Anaya","ana@anaya.es","1234"); // 6
-        User u3 = new User("Paco Perez","paco@perez.es","1234"); // 7
-        User u4 = new User("Son Goku","goku@dragonball.es","1234"); // 8
-        User u5 = new User("Chuck Norris","chuck@norris.es","1234");  // 9
-
-        hc.getManager().persist(u1);
-        hc.getManager().persist(u2);
-        hc.getManager().persist(u3);
-        hc.getManager().persist(u4);
-        hc.getManager().persist(u5);
+        hc.getManager().persist(p2);
 
         hc.getTransaction().commit();
 
 
-        // Comentarios
-        System.out.println("Insertando Comentarios de Ejemplo");
+        // Proyectos
+        System.out.println("Insertando Proyectos de Ejemplo");
 
         hc.getTransaction().begin();
-        Comment cm1 = new Comment("Comentario 01,", u1, p1);//15
-        Comment cm2 = new Comment("Comentario 02,", u2, p2);//16
-        Comment cm3 = new Comment("Comentario 03,", u3, p2);//17
-        Comment cm4 = new Comment("Comentario 04,", u1, p3);//18
-        Comment cm5 = new Comment("Comentario 05,", u4, p4);//19
-        Comment cm6 = new Comment("Comentario 06,", u1, p3);//20
-        Comment cm7 = new Comment("Comentario 07,", u4, p4);//21
-        Comment cm8 = new Comment("Comentario 08,", u2, p3);//22
 
         hc.getManager().persist(cm1);
-        hc.getManager().persist(cm2);
-        hc.getManager().persist(cm3);
-        hc.getManager().persist(cm4);
-        hc.getManager().persist(cm5);
-        hc.getManager().persist(cm6);
-        hc.getManager().persist(cm7);
-        hc.getManager().persist(cm8);
+
 
         hc.getTransaction().commit();
 

@@ -65,17 +65,6 @@ public class Programador {
     }
 
 
-    @Basic
-    // @ColumnTransformer(write = " SHA(?) ")
-    // Le decimos que lo transforme con esta función. Nos ahorramos cifrarlo nosotros
-    @Column(name = "contraseña", nullable = false, length = 100)
-    public String getContraseña() {
-        return contraseña;
-    }
-
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
-    }
 
     @Basic
     @Column(name = "fecha_alta", nullable = false)
@@ -88,39 +77,98 @@ public class Programador {
     }
 
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", orphanRemoval = true, cascade = CascadeType.REMOVE) // Estudiar la cascada
-    public Set<Post> getPosts() {
-        return posts;
+
+    @ManyToOne
+    @JoinColumn(name = "departamento_id", referencedColumnName = "id", nullable = false)
+    public Departamento getDepartamento() {
+        return departamento;
     }
 
-    // No es necesario si no queremos cambiar los post desde usuario
-    public void setPosts(Set<Post> posts) {
-        this.posts = posts;
+    public void setDepartamento(Departamento departamento) {
+        this.departamento = departamento;
     }
 
-    // La Cascada
-    // http://openjpa.apache.org/builds/2.4.0/apache-openjpa/docs/jpa_overview_meta_field.html#jpa_overview_meta_cascade
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", orphanRemoval = true, cascade = CascadeType.REMOVE) // cascade = CascadeType.ALL
-    public Set<Comment> getComments() {
-        return comments;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "programador", orphanRemoval = true, cascade = CascadeType.PERSIST) // Estudiar la cascada
+    public Set<Proyecto> getProyectos() {
+        return proyectos;
     }
 
-    public void setComments(Set<Comment> comments) {
-        this.comments = comments;
+    public void setProyectos(Set<Proyecto> proyectos) {
+        this.proyectos = proyectos;
     }
+
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "programador", orphanRemoval = true, cascade = CascadeType.PERSIST) // Estudiar la cascada
+    public Set<Commit> getCommits() {
+        return commits;
+    }
+
+    public void setCommits(Set<Commit> commits) {
+        this.commits = commits;
+    }
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "programador", orphanRemoval = true, cascade = CascadeType.PERSIST) // Estudiar la cascada
+    public Set<Issue> getIssues() {
+        return issues;
+    }
+
+    public void setIssues(Set<Issue> issues) {
+        this.issues = issues;
+    }
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "programador", orphanRemoval = true, cascade = CascadeType.PERSIST) // Estudiar la cascada
+    public Set<Tecnologia> getTecnologias() {
+        return tecnologias;
+    }
+
+    public void setTecnologias(Set<Tecnologia> tecnologias) {
+        this.tecnologias = tecnologias;
+    }
+
+
+    @Basic
+    @Column(name = "salario", nullable = false)
+    public double getSalario() {
+        return salario;
+    }
+
+    public void setSalario(double salario) {
+        this.salario = salario;
+    }
+
+
+
+    @Basic
+    // @ColumnTransformer(write = " SHA(?) ")
+    // Le decimos que lo transforme con esta función. Nos ahorramos cifrarlo nosotros
+    @Column(name = "contraseña", nullable = false, length = 100)
+    public String getContraseña() {
+        return contraseña;
+    }
+
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
+    }
+
+
+
+
 
     @Override
     // No es obligatorio, pero al hacerlo podemos tener problemas con la recursividad de las llamadas
     public String toString() {
         return "User{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
-                ", email='" + email + '\'' +
-                // ", password='" + password + '\'' + Evitamos
-                ", fechaRegistro=" + fechaRegistro +
-                // Cuidado aqui con las llamadas recursivas No me interesa imprimir los post del usuario, pueden ser muchos
-                // ", posts=" + posts + // Podriamos quitarlos para no verlos
-                // Tampoco saco los comentarios
+                "id =" + id +
+                ", nombre ='" + nombre + '\'' +
+                ", fecha de alta ='" + fecha_alta + '\'' +
+                ", departamento ='" + departamento + '\'' +
+                ", proyectos ='" + proyectos + '\'' +
+               // ", commits ='" + commits + '\'' + SON MUCHOS, no interesa
+                ", issues ='" + issues + '\'' +
+                ", tecnologias ='" + tecnologias + '\'' +
+                ", salario ='" + salario + '\'' +
+                // ", contraseña='" + contraseña + '\'' + Evitamos
+
                 '}';
     }
 }
