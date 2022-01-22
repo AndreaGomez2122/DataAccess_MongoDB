@@ -77,7 +77,6 @@ public class Programador {
     }
 
 
-
     @ManyToOne
     @JoinColumn(name = "departamento_id", referencedColumnName = "id", nullable = false)
     public Departamento getDepartamento() {
@@ -88,7 +87,7 @@ public class Programador {
         this.departamento = departamento;
     }
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "programador", orphanRemoval = true, cascade = CascadeType.PERSIST) // Estudiar la cascada
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "jefe", orphanRemoval = true, cascade = CascadeType.PERSIST) // Estudiar la cascada
     public Set<Proyecto> getProyectos() {
         return proyectos;
     }
@@ -98,7 +97,7 @@ public class Programador {
     }
 
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "programador", orphanRemoval = true, cascade = CascadeType.PERSIST) // Estudiar la cascada
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "autor", orphanRemoval = true, cascade = CascadeType.PERSIST) // Estudiar la cascada
     public Set<Commit> getCommits() {
         return commits;
     }
@@ -107,7 +106,7 @@ public class Programador {
         this.commits = commits;
     }
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "programador", orphanRemoval = true, cascade = CascadeType.PERSIST) // Estudiar la cascada
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "programadores", orphanRemoval = true, cascade = CascadeType.PERSIST) // Estudiar la cascada
     public Set<Issue> getIssues() {
         return issues;
     }
@@ -116,7 +115,11 @@ public class Programador {
         this.issues = issues;
     }
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "programador", orphanRemoval = true, cascade = CascadeType.PERSIST) // Estudiar la cascada
+
+
+    //@OneToMany(fetch = FetchType.EAGER, mappedBy = "programador", orphanRemoval = true, cascade = CascadeType.PERSIST) // Estudiar la cascada
+    @Enumerated(EnumType.STRING)
+    @ElementCollection
     public Set<Tecnologia> getTecnologias() {
         return tecnologias;
     }

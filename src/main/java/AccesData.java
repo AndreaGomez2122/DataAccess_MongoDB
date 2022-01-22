@@ -2,9 +2,7 @@ import com.mongodb.ConnectionString;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
-import dao.Departamento;
-import dao.Programador;
-import dao.Tecnologia;
+import dao.*;
 import manager.HibernateController;
 
 import java.util.*;
@@ -29,9 +27,6 @@ public class AccesData {
         removeData();
 
         HibernateController hc = HibernateController.getInstance();
-
-
-
 
         hc.open();
         // Departamentos
@@ -60,13 +55,21 @@ public class AccesData {
 
         // Proyectos
         System.out.println("Insertando Proyectos de Ejemplo");
-
+//    public Proyecto(String nombre, Programador jefe, double presupuesto, Date fecha_inicio, Date fecha_fin, Set<Tecnologia>tecnologias) {
         hc.getTransaction().begin();
-
-        hc.getManager().persist(cm1);
-
-
+        Proyecto pr1 = new Proyecto("Página Web Bankia",p1,500000, new Date("20-01-2021"), new Date("20-01-2022"),new HashSet<Tecnologia>(Arrays.asList(Tecnologia.WORDPRESS,Tecnologia.ANGULAR)));
+        hc.getManager().persist(pr1);
         hc.getTransaction().commit();
+
+        // Repositorios
+        System.out.println("Insertando Repositorios de Ejemplo");
+        //public Repositorio(String nombre, Date fecha_creacion, Proyecto proyecto){        hc.getTransaction().begin();
+        Repositorio r1 = new Repositorio("Bankia web repository",new Date("20-01-2021"),pr1);
+        hc.getManager().persist(pr1);
+        hc.getTransaction().commit();
+
+
+
 
         hc.close();
 

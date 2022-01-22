@@ -15,23 +15,29 @@ public class App {
         if (properties.readProperty("database.init").equals("true"))
             accesData.initDataBase();
 
-        // Categorías
-        accesData.Categories();
+        // Departamentos
+       // accesData.Categories();
 
-        // Usuarios
-        accesData.Users();
+        // Proyectos
+       // accesData.Users();
 
-        // Login
-        accesData.Login();
+        // Programadores
+       // accesData.Login();
 
-        // Posts
-        accesData.Posts();
+        // Logins
+      // accesData.Posts();
 
-        // Comments
-        accesData.Comments();
+        // Repositorios
+        //accesData.Comments();
+
+        // Issues
+        //accesData.Comments();
+
+        // Commits
+       // accesData.Comments();
     }
     }
 
 
 
-}
+
