@@ -89,7 +89,7 @@ public class AccesData {
         MongoClient mongoClient = MongoClients.create(connectionString);
 
         // Obtenemos la base de datos que necesitamos
-        MongoDatabase blogDB = mongoClient.getDatabase("test");
-        blogDB.drop(); // Si queremos borrar toda la base de datos
+        MongoDatabase testDB = mongoClient.getDatabase("test");
+        testDB.drop(); // Si queremos borrar toda la base de datos
     }
 }

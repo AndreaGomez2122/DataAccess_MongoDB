@@ -60,7 +60,7 @@ import java.util.Set;
 
         //El jefe no puede participar en ningun proyecto
     @ManyToOne
-    @JoinColumn(name = "jefe_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "jefe_id", referencedColumnName = "id", nullable = true)
     public Programador getJefe() {
         return jefe;
     }
