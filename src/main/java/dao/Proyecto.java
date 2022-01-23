@@ -28,14 +28,16 @@ public class Proyecto {
     private Date fecha_fin;
     private Set<Tecnologia> tecnologias;
     private Repositorio repositorio;
+    private Departamento departamento;
 
-    public Proyecto(String nombre, Programador jefe, double presupuesto, Date fecha_inicio, Date fecha_fin, Set<Tecnologia>tecnologias) {
+    public Proyecto(String nombre, Programador jefe, double presupuesto, Date fecha_inicio, Date fecha_fin, Set<Tecnologia>tecnologias, Departamento departamento) {
        this.nombre= nombre;
        this.jefe=jefe;
        this.presupuesto=presupuesto;
        this.fecha_inicio=fecha_inicio;
        this.fecha_fin= fecha_fin;
        this.tecnologias=tecnologias;
+       this.departamento=departamento;
 
     }
 
@@ -114,18 +116,15 @@ public class Proyecto {
         this.tecnologias = tecnologias;
     }
 
-
-    @OneToOne
-    @JoinColumn(name = "repositorio_id", referencedColumnName = "id", nullable = false)
-    public Repositorio getRepositorio() {
-        return repositorio;
+    @ManyToOne
+    @JoinColumn(name = "departamento_id", referencedColumnName = "id", nullable = false)
+    public Departamento getDepartamento() {
+        return departamento;
     }
 
-    public void setRepositorio(Repositorio repositorio) {
-        this.repositorio = repositorio;
+    public void setDepartamento(Departamento departamento) {
+        this.departamento = departamento;
     }
-
-
 
 
 
@@ -140,6 +139,7 @@ public class Proyecto {
                 ", fecha fin =" + fecha_fin +
                 ", tecnologias=" + tecnologias +
                 ", repositorio=" + repositorio +
+                ", departamento=" + departamento +
 
                 '}';
     }

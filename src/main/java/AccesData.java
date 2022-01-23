@@ -60,7 +60,7 @@ public class AccesData {
         System.out.println("Insertando Proyectos de Ejemplo");
 //    public Proyecto(String nombre, Programador jefe, double presupuesto, Date fecha_inicio, Date fecha_fin, Set<Tecnologia>tecnologias) {
         hc.getTransaction().begin();
-        Proyecto pr1 = new Proyecto("Página Web Bankia",p1,500000, new Date("20-01-2021"), new Date("20-01-2022"),new HashSet<Tecnologia>(Arrays.asList(Tecnologia.WORDPRESS,Tecnologia.ANGULAR)));
+        Proyecto pr1 = new Proyecto("Página Web Bankia",p1,500000, new Date("20-01-2021"), new Date("20-01-2022"),new HashSet<Tecnologia>(Arrays.asList(Tecnologia.WORDPRESS,Tecnologia.ANGULAR)),d2);
         hc.getManager().persist(pr1);
         hc.getTransaction().commit();
 

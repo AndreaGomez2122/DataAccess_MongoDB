@@ -70,6 +70,7 @@ import java.util.Set;
     }
 
 
+/*
 
     // Pongo EAGER porque están en contexto diferentes y debememos conseguirlo
         @OneToMany(fetch = FetchType.EAGER, mappedBy = "departamento", cascade = CascadeType.PERSIST) // cascade = CascadeType.ALL
@@ -91,8 +92,7 @@ import java.util.Set;
         public void setProyectos_activos(Set<Proyecto> proyectosActivos) {
             this.proyectos_activos = proyectosActivos;
         }
-
-
+*/
 
 
 
