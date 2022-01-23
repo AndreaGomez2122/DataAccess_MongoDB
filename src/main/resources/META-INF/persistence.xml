@@ -16,6 +16,8 @@
    debemos utilizar la etiqueta <class> cuyo contenido debe incluir el paquete y el
    nombre de la clase: -->
 
+
+        <class>dao.Commit</class>
         <class>dao.Departamento</class>
         <class>dao.Estado</class>
         <class>dao.Issue</class>

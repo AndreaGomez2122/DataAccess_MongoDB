@@ -26,7 +26,7 @@ public class AccesData {
 
     public void initDataBase() {
         // Borramos los datos previos
-        removeData();
+        //removeData();
 
         HibernateController hc = HibernateController.getInstance();
 
