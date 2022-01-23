@@ -26,12 +26,11 @@ public class AccesData {
 
     public void initDataBase() {
         // Borramos los datos previos
-        //removeData();
+        removeData();
 
         HibernateController hc = HibernateController.getInstance();
 
         hc.open();
-
 
         // Departamentos
         System.out.println("Insertando Departamentos de Ejemplo");

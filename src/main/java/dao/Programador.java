@@ -106,11 +106,10 @@ public class Programador {
     }
 
 
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "programadores", cascade = CascadeType.REMOVE) // cascade = CascadeType.ALL
+    @ManyToMany(mappedBy = "programadores")
     public Set<Issue> getIssues() {
         return issues;
     }
-
     public void setIssues(Set<Issue> issues) {
         this.issues = issues;
     }

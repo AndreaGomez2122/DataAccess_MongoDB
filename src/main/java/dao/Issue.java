@@ -108,7 +108,7 @@ public class Issue {
     }
 
 
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "issues", cascade = CascadeType.REMOVE) // cascade = CascadeType.ALL
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}) // cascade = CascadeType.ALL
     public Set<Programador> getProgramadores() {
         return programadores;
     }
