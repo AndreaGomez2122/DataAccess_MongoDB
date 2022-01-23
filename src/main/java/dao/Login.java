@@ -13,8 +13,12 @@ import java.util.Objects;
 @AllArgsConstructor
 @Entity
 @Table(name = "login")
+@NamedQueries({
+        @NamedQuery(name = "Login.findAll", query = "SELECT i FROM Login i"),
 // Consulta por si queremos buscar logins por tokens
-@NamedQuery(name = "Login.getByToken", query = "SELECT l FROM Login l WHERE l.token = ?1")
+        @NamedQuery(name = "Login.getByToken", query = "SELECT l FROM Login l WHERE l.token = ?1")
+})
+
 public class Login {
     private long id;
     private  Programador programador;
