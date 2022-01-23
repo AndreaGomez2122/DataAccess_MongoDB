@@ -10,6 +10,7 @@ public class DepartamentoMapper extends BaseMapper<Departamento, DepartamentoDTO
     public Departamento fromDTO(DepartamentoDTO item) {
         Departamento dep = new Departamento();
         //dep.setters
+        dep.setId(item.getId());
         return dep;
     }
 

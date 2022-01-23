@@ -2,10 +2,12 @@ package dto;
 
 import dao.Programador;
 import dao.Proyecto;
+import lombok.Data;
 import org.bson.types.ObjectId;
 
 import java.util.Set;
 
+@Data
 public class DepartamentoDTO {
 
     private ObjectId id;
