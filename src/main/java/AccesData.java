@@ -4,6 +4,8 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
 import dao.*;
 import manager.HibernateController;
+import org.bson.Document;
+import org.bson.types.ObjectId;
 
 import java.util.*;
 
@@ -29,6 +31,8 @@ public class AccesData {
         HibernateController hc = HibernateController.getInstance();
 
         hc.open();
+
+
         // Departamentos
         System.out.println("Insertando Departamentos de Ejemplo");
 
@@ -86,7 +90,7 @@ public class AccesData {
         MongoClient mongoClient = MongoClients.create(connectionString);
 
         // Obtenemos la base de datos que necesitamos
-        MongoDatabase blogDB = mongoClient.getDatabase("accesData");
+        MongoDatabase blogDB = mongoClient.getDatabase("test");
         blogDB.drop(); // Si queremos borrar toda la base de datos
     }
 }

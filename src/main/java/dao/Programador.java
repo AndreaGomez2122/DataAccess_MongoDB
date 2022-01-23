@@ -65,7 +65,6 @@ public class Programador {
     }
 
 
-
     @Basic
     @Column(name = "fecha_alta", nullable = false)
     public Date getFecha_alta() {
@@ -106,7 +105,8 @@ public class Programador {
         this.commits = commits;
     }
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "programadores", orphanRemoval = true, cascade = CascadeType.PERSIST) // Estudiar la cascada
+
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "programadores", cascade = CascadeType.REMOVE) // cascade = CascadeType.ALL
     public Set<Issue> getIssues() {
         return issues;
     }
@@ -114,7 +114,6 @@ public class Programador {
     public void setIssues(Set<Issue> issues) {
         this.issues = issues;
     }
-
 
 
     //@OneToMany(fetch = FetchType.EAGER, mappedBy = "programador", orphanRemoval = true, cascade = CascadeType.PERSIST) // Estudiar la cascada
@@ -167,7 +166,7 @@ public class Programador {
                 ", departamento ='" + departamento + '\'' +
                 ", proyectos ='" + proyectos + '\'' +
                // ", commits ='" + commits + '\'' + SON MUCHOS, no interesa
-                ", issues ='" + issues + '\'' +
+               // ", issues ='" + issues + '\'' + No lo sacamos ya que en las issues ya salen los programadores activos dela misma, evitamos un bucle infinito.
                 ", tecnologias ='" + tecnologias + '\'' +
                 ", salario ='" + salario + '\'' +
                 // ", contraseña='" + contraseña + '\'' + Evitamos

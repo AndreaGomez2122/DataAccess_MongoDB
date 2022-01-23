@@ -13,7 +13,6 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "repositorio")
-// Todos los programadores
 @NamedQueries({
         @NamedQuery(name = "Repositorio.findAll", query = "SELECT r FROM Repositorio r"),
 
