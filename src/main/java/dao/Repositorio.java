@@ -32,7 +32,6 @@ public class Repositorio {
         this.proyecto = proyecto;
         this.commits = new HashSet<Commit>();
         this.issues = new HashSet<Issue>();
-
     }
 
     @Id

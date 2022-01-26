@@ -3,17 +3,12 @@ package service;
 
 import dao.Departamento;
 import dao.Programador;
-import dao.Proyecto;
 import dto.DepartamentoDTO;
-import manager.HibernateController;
 import mapper.DepartamentoMapper;
 import org.bson.types.ObjectId;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
 import repository.DepartamentoRepository;
 
 import java.sql.SQLException;

@@ -23,7 +23,13 @@ public class DepartamentoMapper extends BaseMapper<Departamento, DepartamentoDTO
     @Override
     public DepartamentoDTO toDTO(Departamento item) {
         DepartamentoDTO depDTO = new DepartamentoDTO();
-        //depDTO.setters
+        depDTO.setId(item.getId());
+        depDTO.setNombre(item.getNombre());
+        depDTO.setJefe(item.getJefe());
+        // dep.setHistorico_jefes();
+        // dep.setProyectos_activos();
+        // dep.setProyectos_terminados();
+        depDTO.setPresupuesto(item.getPresupuesto());
         return depDTO;
     }
 }
