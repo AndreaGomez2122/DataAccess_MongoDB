@@ -1,6 +1,7 @@
 package dao;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.bson.types.ObjectId;
 import utils.Cifrador;
 
 import javax.persistence.*;
@@ -20,7 +21,7 @@ import java.util.*;
        // @NamedQuery(name = "User.getMyPosts", query = "SELECT u.posts FROM User u WHERE u.id = :userId")
 })
 public class Programador {
-    private long id;
+    private ObjectId id;
     private String nombre;
     private Date fecha_alta;
     private Departamento departamento;
@@ -44,13 +45,13 @@ public class Programador {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
-    public long getId() {
+    public ObjectId getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(ObjectId id) {
         this.id = id;
     }
 

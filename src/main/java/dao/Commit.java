@@ -3,6 +3,7 @@ package dao;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.bson.types.ObjectId;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -16,7 +17,7 @@ import java.util.Date;
 
 })
 public class Commit {
-    private long id;
+    private ObjectId id;
     private String titulo;
     private String texto;
     private Date fecha;
@@ -24,27 +25,26 @@ public class Commit {
     private Proyecto proyecto;
     private Programador autor;
 
-    public Commit(String titulo, String texto, Date fecha, Repositorio repositorio, Proyecto proyecto, Programador autor){
+    public Commit(String titulo, String texto, Date fecha, Repositorio repositorio, Proyecto proyecto, Programador autor) {
         this.titulo = titulo;
-        this.texto=texto;
-        this.fecha=fecha;
+        this.texto = texto;
+        this.fecha = fecha;
         this.repositorio = repositorio;
-        this.proyecto=proyecto;
-        this.autor=autor;
+        this.proyecto = proyecto;
+        this.autor = autor;
 
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
-    public long getId() {
+    public ObjectId getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(ObjectId id) {
         this.id = id;
     }
-
 
 
     @Basic
@@ -88,7 +88,6 @@ public class Commit {
     public void setRepositorio(Repositorio repositorio) {
         this.repositorio = repositorio;
     }
-
 
 
     @ManyToOne

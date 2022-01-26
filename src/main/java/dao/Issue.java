@@ -1,9 +1,9 @@
 package dao;
 
 
-
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.bson.types.ObjectId;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -18,38 +18,36 @@ import java.util.Set;
 
 })
 public class Issue {
-    private long id;
+    private ObjectId id;
     private String titulo;
     private String texto;
     private Date fecha;
-    private Set<Programador>programadores; //No se añade al constructor. Se le añaden los programadores más tarde.
+    private Set<Programador> programadores; //No se añade al constructor. Se le añaden los programadores más tarde.
     private Proyecto proyecto;
     private Repositorio repositorio;
     private Estado estado;
 
-    public Issue(String titulo, String texto, Date fecha, Proyecto proyecto,Repositorio repositorio, Estado estado){
+    public Issue(String titulo, String texto, Date fecha, Proyecto proyecto, Repositorio repositorio, Estado estado) {
         this.titulo = titulo;
-        this.texto=texto;
-        this.fecha=fecha;
-        this.proyecto=proyecto;
+        this.texto = texto;
+        this.fecha = fecha;
+        this.proyecto = proyecto;
         this.repositorio = repositorio;
-        this.estado=estado;
-
+        this.estado = estado;
 
 
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
-    public long getId() {
+    public ObjectId getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(ObjectId id) {
         this.id = id;
     }
-
 
 
     @Basic
@@ -82,7 +80,6 @@ public class Issue {
     public void setFecha(Date fecha_creacion) {
         this.fecha = fecha;
     }
-
 
 
     @ManyToOne

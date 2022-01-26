@@ -27,7 +27,7 @@ public class DepartamentoDTO {
                 ", presupuesto=" + presupuesto +
                 ", proyectos_terminados=" + proyectos_terminados +
                 ", proyectos_activos=" + proyectos_activos +
-                ", historico_jefes=" + historico_jefes +
+                ", historico_jefes=" + historico_jefes.stream().map(Programador::getNombre) +
                 '}';
     }
 }

@@ -37,7 +37,7 @@ public class Departamento {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     public ObjectId getId() {
         return id;

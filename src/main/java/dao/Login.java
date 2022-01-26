@@ -3,6 +3,7 @@ package dao;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.bson.types.ObjectId;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -20,20 +21,20 @@ import java.util.Objects;
 })
 
 public class Login {
-    private long id;
+    private ObjectId id;
     private  Programador programador;
     private Timestamp instante;
     private String token;
     private boolean activo;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
-    public long getId() {
+    public ObjectId getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(ObjectId id) {
         this.id = id;
     }
 
