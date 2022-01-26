@@ -3,6 +3,7 @@ package dao;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.bson.types.ObjectId;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -18,14 +19,14 @@ import java.util.Set;
 
 })
 public class Repositorio {
-    private long id;
+    private ObjectId id;
     private String nombre;
     private Date fecha_creacion;
     private Proyecto proyecto;
     private Set<Commit> commits;
     private Set<Issue> issues;
 
-    public Repositorio(String nombre, Date fecha_creacion, Proyecto proyecto){
+    public Repositorio(String nombre, Date fecha_creacion, Proyecto proyecto) {
         this.nombre = nombre;
         this.fecha_creacion = fecha_creacion;
         this.proyecto = proyecto;
@@ -35,13 +36,13 @@ public class Repositorio {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
-    public long getId() {
+    public ObjectId getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(ObjectId id) {
         this.id = id;
     }
 
@@ -54,7 +55,6 @@ public class Repositorio {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
 
 
     @Basic
@@ -79,7 +79,8 @@ public class Repositorio {
     }
 
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "repositorio", orphanRemoval = true, cascade = CascadeType.PERSIST) // Estudiar la cascada
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "repositorio", orphanRemoval = true, cascade = CascadeType.PERSIST)
+    // Estudiar la cascada
     public Set<Commit> getCommits() {
         return commits;
     }
@@ -88,7 +89,8 @@ public class Repositorio {
         this.commits = commits;
     }
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "repositorio", orphanRemoval = true, cascade = CascadeType.PERSIST) // Estudiar la cascada
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "repositorio", orphanRemoval = true, cascade = CascadeType.PERSIST)
+    // Estudiar la cascada
     public Set<Issue> getIssues() {
         return issues;
     }
@@ -96,7 +98,6 @@ public class Repositorio {
     public void setIssues(Set<Issue> issues) {
         this.issues = issues;
     }
-
 
 
     @Override

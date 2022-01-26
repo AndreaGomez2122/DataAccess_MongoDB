@@ -3,6 +3,7 @@ package dao;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.bson.types.ObjectId;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -20,35 +21,42 @@ import java.util.Set;
 })
 @Table(name = "proyecto") // Ojo con la minuscula que en la tabla está así
 public class Proyecto {
-    private long id;
+    private ObjectId id;
     private Programador jefe;
     private String nombre;
     private double presupuesto;
     private Date fecha_inicio;
     private Date fecha_fin;
     private Set<Tecnologia> tecnologias;
+
+    @ManyToOne
+    @JoinColumn(name = "repositorio_id")
     private Repositorio repositorio;
     private Departamento departamento;
 
-    public Proyecto(String nombre, Programador jefe, double presupuesto, Date fecha_inicio, Date fecha_fin, Set<Tecnologia>tecnologias, Departamento departamento) {
-       this.nombre= nombre;
-       this.jefe=jefe;
-       this.presupuesto=presupuesto;
-       this.fecha_inicio=fecha_inicio;
-       this.fecha_fin= fecha_fin;
-       this.tecnologias=tecnologias;
-       this.departamento=departamento;
+    public Repositorio getRepositorio() {
+        return repositorio;
+    }
+
+    public Proyecto(String nombre, Programador jefe, double presupuesto, Date fecha_inicio, Date fecha_fin, Set<Tecnologia> tecnologias, Departamento departamento) {
+        this.nombre = nombre;
+        this.jefe = jefe;
+        this.presupuesto = presupuesto;
+        this.fecha_inicio = fecha_inicio;
+        this.fecha_fin = fecha_fin;
+        this.tecnologias = tecnologias;
+        this.departamento = departamento;
 
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
-    public long getId() {
+    public ObjectId getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(ObjectId id) {
         this.id = id;
     }
 
@@ -125,7 +133,6 @@ public class Proyecto {
     public void setDepartamento(Departamento departamento) {
         this.departamento = departamento;
     }
-
 
 
     @Override

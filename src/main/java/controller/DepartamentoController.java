@@ -1,6 +1,7 @@
 package controller;
 
 import dto.DepartamentoDTO;
+import manager.HibernateController;
 import org.bson.types.ObjectId;
 import repository.DepartamentoRepository;
 import service.DepartamentoService;
@@ -21,7 +22,7 @@ public class DepartamentoController {
 
     public static DepartamentoController getInstance() {
         if (controller == null) {
-            controller = new DepartamentoController(new DepartamentoService(new DepartamentoRepository()));
+            controller = new DepartamentoController(new DepartamentoService(new DepartamentoRepository(HibernateController.getInstance())));
         }
         return controller;
     }

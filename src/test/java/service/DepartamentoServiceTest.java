@@ -2,7 +2,10 @@ package service;
 
 
 import dao.Departamento;
+import dao.Programador;
+import dao.Proyecto;
 import dto.DepartamentoDTO;
+import manager.HibernateController;
 import mapper.DepartamentoMapper;
 import org.bson.types.ObjectId;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,32 +18,38 @@ import repository.DepartamentoRepository;
 
 import java.sql.SQLException;
 
-import static org.mockito.Mockito.*;
+
+
 import static org.junit.jupiter.api.Assertions.*;
 
-@RunWith(MockitoJUnitRunner.class)
+
 public class DepartamentoServiceTest {
 
     //dependencia
-    @Mock
     DepartamentoRepository repository;
-
     DepartamentoMapper mapper;
     //System under Test
     DepartamentoService service;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
+        this.repository = Mockito.mock(DepartamentoRepository.class);
         this.service = new DepartamentoService(repository);
         this.mapper = new DepartamentoMapper();
     }
 
     @Test
-    void getDepartamentoByIdTest() throws SQLException {
+    public void getDepartamentoByIdTest() throws SQLException {
         //given
         DepartamentoDTO depDTO = new DepartamentoDTO();
         ObjectId id = new ObjectId();
         depDTO.setId(id);
+        depDTO.setNombre("nombre proyecto");
+        depDTO.setJefe(new Programador());
+        depDTO.setPresupuesto(2000);
+        depDTO.setProyectos_terminados(null);
+        depDTO.setProyectos_activos(null);
+        depDTO.setHistorico_jefes(null);
         Departamento dep = mapper.fromDTO(depDTO);
 
 

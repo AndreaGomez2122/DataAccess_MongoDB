@@ -9,10 +9,14 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class DepartamentoRepository implements CrudRepository<Departamento, ObjectId> {
+    HibernateController hc;
+    public DepartamentoRepository(HibernateController hc){
+        this.hc=hc;
+    }
 
     @Override
     public List<Departamento> findAll() {
-        HibernateController hc = HibernateController.getInstance();
+      //  HibernateController hc = HibernateController.getInstance();
         hc.open();
         TypedQuery<Departamento> query = hc.getManager().createNamedQuery("Departamento.findAll", Departamento.class);
         List<Departamento> list = query.getResultList();
@@ -22,18 +26,18 @@ public class DepartamentoRepository implements CrudRepository<Departamento, Obje
 
     @Override
     public Departamento getById(ObjectId id) throws SQLException {
-        HibernateController hc = HibernateController.getInstance();
+       // HibernateController hc = HibernateController.getInstance();
         hc.open();
-        Departamento user = hc.getManager().find(Departamento.class, id);
+        Departamento dep = hc.getManager().find(Departamento.class, id);
         hc.close();
-        if (user != null)
-            return user;
+        if (dep != null)
+            return dep;
         throw new SQLException("Error DepartamentoRepository no existe departamento con ID: " + id);
     }
 
     @Override
     public Departamento save(Departamento departamento) throws SQLException {
-        HibernateController hc = HibernateController.getInstance();
+       // HibernateController hc = HibernateController.getInstance();
         hc.open();
         try {
             hc.getTransaction().begin();
@@ -52,7 +56,7 @@ public class DepartamentoRepository implements CrudRepository<Departamento, Obje
 
     @Override
     public Departamento update(Departamento departamento) throws SQLException {
-        HibernateController hc = HibernateController.getInstance();
+      //  HibernateController hc = HibernateController.getInstance();
         hc.open();
         try {
             hc.getTransaction().begin();
@@ -71,7 +75,7 @@ public class DepartamentoRepository implements CrudRepository<Departamento, Obje
 
     @Override
     public Departamento delete(Departamento departamento) throws SQLException {
-        HibernateController hc = HibernateController.getInstance();
+       // HibernateController hc = HibernateController.getInstance();
         hc.open();
         try {
             hc.getTransaction().begin();

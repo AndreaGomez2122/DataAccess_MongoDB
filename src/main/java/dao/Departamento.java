@@ -70,8 +70,39 @@ public class Departamento {
         this.jefe = jefe;
     }
 
+    public double getPresupuesto() {
+        return presupuesto;
+    }
 
-/*
+    public void setPresupuesto(double presupuesto) {
+        this.presupuesto = presupuesto;
+    }
+
+    public Set<Proyecto> getProyectos_terminados() {
+        return proyectos_terminados;
+    }
+
+    public void setProyectos_terminados(Set<Proyecto> proyectos_terminados) {
+        this.proyectos_terminados = proyectos_terminados;
+    }
+
+    public Set<Proyecto> getProyectos_activos() {
+        return proyectos_activos;
+    }
+
+    public void setProyectos_activos(Set<Proyecto> proyectos_activos) {
+        this.proyectos_activos = proyectos_activos;
+    }
+
+    public Set<Programador> getHistorico_jefes() {
+        return historico_jefes;
+    }
+
+    public void setHistorico_jefes(Set<Programador> historico_jefes) {
+        this.historico_jefes = historico_jefes;
+    }
+
+    /*
 
     // Pongo EAGER porque están en contexto diferentes y debememos conseguirlo
         @OneToMany(fetch = FetchType.EAGER, mappedBy = "departamento", cascade = CascadeType.PERSIST) // cascade = CascadeType.ALL
