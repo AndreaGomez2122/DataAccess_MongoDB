@@ -16,7 +16,7 @@ public class App {
             accesData.initDataBase();
 
         // Departamentos
-       // accesData.Categories();
+       //accesData.Categories();
 
         // Proyectos
        // accesData.Users();
