@@ -16,10 +16,10 @@ public class App {
             accesData.initDataBase();
 
         // Departamentos
-       //accesData.Categories();
+       accesData.departamentos();
 
         // Proyectos
-       // accesData.Users();
+       accesData.proyectos();
 
         // Programadores
        // accesData.Login();
