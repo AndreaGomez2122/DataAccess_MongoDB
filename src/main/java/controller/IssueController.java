@@ -1,5 +1,6 @@
 package controller;
 
+import dto.CommitDTO;
 import dto.IssueDTO;
 import org.bson.types.ObjectId;
 import repository.IssueRepository;
@@ -7,6 +8,7 @@ import service.IssueService;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 public class IssueController {
     private static IssueController controller = null;
@@ -68,6 +70,17 @@ public class IssueController {
         } catch (SQLException e) {
             System.err.println("Error IssueController en deleteIssue: " + e.getMessage());
             return null;
+        }
+    }
+
+
+
+    public Optional<IssueDTO> getIssuetByIdOptional(ObjectId id) {
+        try {
+            return Optional.of( issueService.getIssueById(id));
+        } catch (SQLException e) {
+            System.err.println("Error IssueController en getIssueById: " + e.getMessage());
+            return Optional.empty();
         }
     }
 }

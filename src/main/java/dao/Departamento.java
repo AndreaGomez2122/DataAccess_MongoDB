@@ -37,7 +37,7 @@ public class Departamento {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     public ObjectId getId() {
         return id;
@@ -70,6 +70,8 @@ public class Departamento {
         this.jefe = jefe;
     }
 
+    @Basic
+    @Column(name = "presupuesto", nullable = false, length = 250)
     public double getPresupuesto() {
         return presupuesto;
     }
@@ -78,6 +80,8 @@ public class Departamento {
         this.presupuesto = presupuesto;
     }
 
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "departamento", orphanRemoval = true, cascade = CascadeType.ALL)
     public Set<Proyecto> getProyectos_terminados() {
         return proyectos_terminados;
     }
@@ -86,6 +90,7 @@ public class Departamento {
         this.proyectos_terminados = proyectos_terminados;
     }
 
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "departamento", orphanRemoval = true, cascade = CascadeType.ALL)
     public Set<Proyecto> getProyectos_activos() {
         return proyectos_activos;
     }
@@ -94,6 +99,7 @@ public class Departamento {
         this.proyectos_activos = proyectos_activos;
     }
 
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "departamento", orphanRemoval = true, cascade = CascadeType.PERSIST)
     public Set<Programador> getHistorico_jefes() {
         return historico_jefes;
     }

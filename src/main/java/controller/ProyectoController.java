@@ -1,5 +1,6 @@
 package controller;
 
+import dto.DepartamentoDTO;
 import dto.ProyectoDTO;
 import org.bson.types.ObjectId;
 import repository.ProyectoRepository;
@@ -7,6 +8,7 @@ import service.ProyectoService;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 public class ProyectoController {
     private static ProyectoController controller = null;
@@ -68,6 +70,16 @@ public class ProyectoController {
         } catch (SQLException e) {
             System.err.println("Error ProyectoController en deleteProyecto: " + e.getMessage());
             return null;
+        }
+    }
+
+
+    public Optional<ProyectoDTO> getProyectoByIdOptional(ObjectId id) {
+        try {
+            return Optional.of(proyectoService.getProyectoById(id));
+        } catch (SQLException e) {
+            System.err.println("Error ProyectoController en getProyectoById: " + e.getMessage());
+            return Optional.empty();
         }
     }
 }

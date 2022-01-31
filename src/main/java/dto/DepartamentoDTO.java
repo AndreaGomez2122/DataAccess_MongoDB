@@ -2,12 +2,16 @@ package dto;
 
 import dao.Programador;
 import dao.Proyecto;
-import lombok.Data;
+import lombok.*;
 import org.bson.types.ObjectId;
 
 import java.util.Set;
 
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+
 public class DepartamentoDTO {
 
     private ObjectId id;
@@ -18,6 +22,7 @@ public class DepartamentoDTO {
     private Set<Proyecto> proyectos_activos;
     private Set<Programador> historico_jefes;
 
+
     @Override
     public String toString() {
         return "DepartamentoDTO{" +
@@ -27,7 +32,8 @@ public class DepartamentoDTO {
                 ", presupuesto=" + presupuesto +
                 ", proyectos_terminados=" + proyectos_terminados +
                 ", proyectos_activos=" + proyectos_activos +
-                ", historico_jefes=" + historico_jefes.stream().map(Programador::getNombre) +
+                ", historicoJefes=" + historico_jefes +
+                //", historico_jefes=" + historico_jefes.stream().map(Programador::getNombre) +
                 '}';
     }
 }

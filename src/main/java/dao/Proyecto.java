@@ -2,13 +2,14 @@ package dao;
 
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.bson.types.ObjectId;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
+
 
 @Entity
 @NoArgsConstructor
@@ -28,15 +29,12 @@ public class Proyecto {
     private Date fecha_inicio;
     private Date fecha_fin;
     private Set<Tecnologia> tecnologias;
-
-    @ManyToOne
-    @JoinColumn(name = "repositorio_id")
     private Repositorio repositorio;
     private Departamento departamento;
 
-    public Repositorio getRepositorio() {
-        return repositorio;
-    }
+
+
+
 
     public Proyecto(String nombre, Programador jefe, double presupuesto, Date fecha_inicio, Date fecha_fin, Set<Tecnologia> tecnologias, Departamento departamento) {
         this.nombre = nombre;
@@ -50,7 +48,7 @@ public class Proyecto {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     public ObjectId getId() {
         return id;
@@ -134,6 +132,15 @@ public class Proyecto {
         this.departamento = departamento;
     }
 
+    @OneToOne
+    @JoinColumn(name = "repositorio_id",referencedColumnName = "id", nullable = true)
+    public Repositorio getRepositorio() {
+        return repositorio;
+    }
+
+    public void setRepositorio(Repositorio repositorio) {
+        this.repositorio = repositorio;
+    }
 
     @Override
     public String toString() {
@@ -145,9 +152,8 @@ public class Proyecto {
                 ", fecha inicio =" + fecha_inicio +
                 ", fecha fin =" + fecha_fin +
                 ", tecnologias=" + tecnologias +
-                ", repositorio=" + repositorio +
+               ", repositorio=" + repositorio+
                 ", departamento=" + departamento +
-
                 '}';
     }
 }

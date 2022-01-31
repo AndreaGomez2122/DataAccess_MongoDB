@@ -1,5 +1,6 @@
 package controller;
 
+import dto.ProgramadorDTO;
 import dto.RepositorioDTO;
 import org.bson.types.ObjectId;
 import repository.RepositorioRepository;
@@ -7,6 +8,7 @@ import service.RepositorioService;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 public class RepositorioController {
     private static RepositorioController controller = null;
@@ -68,6 +70,15 @@ public class RepositorioController {
         } catch (SQLException e) {
             System.err.println("Error RepositorioController en deleteRepositorio: " + e.getMessage());
             return null;
+        }
+    }
+
+    public Optional<RepositorioDTO> getRepositorioByIdOptional(ObjectId id) {
+        try {
+            return Optional.of(repositorioService.getRepositorioById(id));
+        } catch (SQLException e) {
+            System.err.println("Error RepositorioController en getRepositorioById: " + e.getMessage());
+            return Optional.empty();
         }
     }
 }

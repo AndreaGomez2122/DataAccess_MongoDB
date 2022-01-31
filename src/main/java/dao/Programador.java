@@ -45,7 +45,7 @@ public class Programador {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     public ObjectId getId() {
         return id;
@@ -164,7 +164,7 @@ public class Programador {
                 ", nombre ='" + nombre + '\'' +
                 ", fecha de alta ='" + fecha_alta + '\'' +
                 ", departamento ='" + departamento + '\'' +
-                ", proyectos ='" + proyectos + '\'' +
+                //", proyectos ='" + proyectos + '\'' +
                // ", commits ='" + commits + '\'' + SON MUCHOS, no interesa
                // ", issues ='" + issues + '\'' + No lo sacamos ya que en las issues ya salen los programadores activos dela misma, evitamos un bucle infinito.
                 ", tecnologias ='" + tecnologias + '\'' +
