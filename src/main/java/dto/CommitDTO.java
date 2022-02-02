@@ -12,6 +12,7 @@ import org.bson.types.ObjectId;
 import java.util.Date;
 
 @Data
+@Builder
 public class CommitDTO {
     private ObjectId id;
     private String titulo;

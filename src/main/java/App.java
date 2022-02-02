@@ -16,22 +16,22 @@ public class App {
             accesData.initDataBase();
 
         // Departamentos
-       //accesData.Categories();
+       accesData.departamentos();
 
         // Proyectos
-       // accesData.Users();
+       accesData.proyectos();
 
         // Programadores
-       // accesData.Login();
-
-        // Logins
-      // accesData.Posts();
+       accesData.programadores();
 
         // Repositorios
-        //accesData.Comments();
+        accesData.repositorios();
+
+        // Commit
+        accesData.commits();
 
         // Issues
-        //accesData.Comments();
+        accesData.issues();
 
         // Commits
        // accesData.Comments();

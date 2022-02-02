@@ -3,6 +3,7 @@ package dto;
 import dao.Commit;
 import dao.Issue;
 import dao.Proyecto;
+import lombok.Builder;
 import lombok.Data;
 import org.bson.types.ObjectId;
 
@@ -10,6 +11,7 @@ import java.util.Date;
 import java.util.Set;
 
 @Data
+@Builder
 public class RepositorioDTO {
     private ObjectId id;
     private String nombre;

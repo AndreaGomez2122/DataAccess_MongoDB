@@ -8,6 +8,7 @@ import service.DepartamentoService;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 public class DepartamentoController {
     private static DepartamentoController controller = null;
@@ -71,4 +72,18 @@ public class DepartamentoController {
             return null;
         }
     }
+
+
+
+    public Optional<DepartamentoDTO> getDepartamentoByIdOptional(ObjectId id) {
+        try {
+            return Optional.of(departamentoService.getDepartamentoById(id));
+        } catch (SQLException e) {
+            System.err.println("Error DepartamentoController en getDepartamentoById: " + e.getMessage());
+            return Optional.empty();
+        }
+    }
+
+
+
 }

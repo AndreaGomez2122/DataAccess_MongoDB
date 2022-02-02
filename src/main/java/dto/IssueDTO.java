@@ -4,6 +4,7 @@ import dao.Estado;
 import dao.Programador;
 import dao.Proyecto;
 import dao.Repositorio;
+import lombok.Builder;
 import lombok.Data;
 import org.bson.types.ObjectId;
 
@@ -11,6 +12,7 @@ import java.util.Date;
 import java.util.Set;
 
 @Data
+@Builder
 public class IssueDTO {
     private ObjectId id;
     private String titulo;

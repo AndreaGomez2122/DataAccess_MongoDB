@@ -4,6 +4,7 @@ import dao.Departamento;
 import dao.Programador;
 import dao.Repositorio;
 import dao.Tecnologia;
+import lombok.Builder;
 import lombok.Data;
 import org.bson.types.ObjectId;
 
@@ -11,6 +12,7 @@ import java.util.Date;
 import java.util.Set;
 
 @Data
+@Builder
 public class ProyectoDTO {
     private ObjectId id;
     private Programador jefe;

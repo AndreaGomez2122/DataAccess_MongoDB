@@ -1,5 +1,6 @@
 package controller;
 
+import dto.DepartamentoDTO;
 import dto.ProgramadorDTO;
 import org.bson.types.ObjectId;
 import repository.ProgramadorRepository;
@@ -7,6 +8,7 @@ import service.ProgramadorService;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 public class ProgramadorController {
     private static ProgramadorController controller = null;
@@ -70,4 +72,18 @@ public class ProgramadorController {
             return null;
         }
     }
+
+
+
+    public Optional<ProgramadorDTO> getProgramadorByIdOptional(ObjectId id) {
+        try {
+            return Optional.of(programadorService.getProgramadorById(id));
+        } catch (SQLException e) {
+            System.err.println("Error ProgramadorController en getProgramadorById: " + e.getMessage());
+            return Optional.empty();
+        }
+    }
+
+
+
 }

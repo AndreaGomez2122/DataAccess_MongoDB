@@ -1,12 +1,14 @@
 package controller;
 
 import dto.CommitDTO;
+import dto.RepositorioDTO;
 import org.bson.types.ObjectId;
 import repository.CommitRepository;
 import service.CommitService;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 public class CommitController {
     private static CommitController controller = null;
@@ -68,6 +70,16 @@ public class CommitController {
         } catch (SQLException e) {
             System.err.println("Error CommitController en deleteCommit: " + e.getMessage());
             return null;
+        }
+    }
+
+
+    public Optional<CommitDTO> getCommitByIdOptional(ObjectId id) {
+        try {
+            return Optional.of( commitService.getCommitById(id));
+        } catch (SQLException e) {
+            System.err.println("Error CommitController en getCommitBuId: " + e.getMessage());
+            return Optional.empty();
         }
     }
 }
