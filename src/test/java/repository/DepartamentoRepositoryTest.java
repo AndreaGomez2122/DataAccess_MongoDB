@@ -2,11 +2,13 @@ package repository;
 
 import dao.Departamento;
 import manager.HibernateController;
+import org.bson.types.ObjectId;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class DepartamentoRepositoryTest {
@@ -15,7 +17,7 @@ public class DepartamentoRepositoryTest {
 
     @BeforeEach
     void setUp() {
-        hc= HibernateController.getInstance();
+        hc = HibernateController.getInstance();
         repository = new DepartamentoRepository(hc);
     }
 
@@ -35,22 +37,48 @@ public class DepartamentoRepositoryTest {
     }
 
     @Test
-    public void testGet() {
+    public void testGet() throws SQLException {
+        //Faltaría meter una id real
 
+        ObjectId id = null;
+        Departamento dep = repository.getById(id);
+        Assertions.assertEquals(dep.getId(), id);
     }
 
     @Test
-    public void testCreate() {
+    public void testCreate() throws SQLException {
         Departamento dep = new Departamento();
-        //dep.set
+        dep.setNombre("departamentoTest");
+        dep.setPresupuesto(2000);
+        Assertions.assertEquals(dep, repository.save(dep));
     }
 
     @Test
-    public void testUpdate() {
+    public void testUpdate() throws SQLException {
+        //Faltaría meter una id real
+        ObjectId id = null;
+        Departamento dep = new Departamento();
+        dep.setId(id);
+        dep.setNombre("departamentoTest");
+        dep.setPresupuesto(2000);
+
+        Departamento dep2 = repository.update(dep);
+        Assertions.assertAll(
+                () -> Assertions.assertEquals(dep.getId(), id),
+                () -> Assertions.assertEquals(dep, dep2)
+        );
     }
 
 
     @Test
-    public void testDelete() {
+    public void testDelete() throws SQLException {
+        //Faltaría meter una id real
+        ObjectId id = null;
+        Departamento dep = new Departamento();
+        dep.setId(id);
+        dep.setNombre("departamentoTest");
+        dep.setPresupuesto(2000);
+        Assertions.assertEquals(dep, repository.delete(dep));
     }
 }
+
