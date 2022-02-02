@@ -147,13 +147,13 @@ public class Proyecto {
         return "Proyecto{" +
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
-                ", jefe='" + jefe + '\'' +
+                ", jefe='" + jefe.getNombre() + '\'' +
                 ", presupuesto='" + presupuesto + '\'' +
                 ", fecha inicio =" + fecha_inicio +
                 ", fecha fin =" + fecha_fin +
                 ", tecnologias=" + tecnologias +
-               ", repositorio=" + repositorio+
-                ", departamento=" + departamento +
+               ", repositorio=" + repositorio.getNombre()+
+                ", departamento=" + departamento.getNombre() +
                 '}';
     }
 }

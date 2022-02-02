@@ -163,8 +163,8 @@ public class Programador {
                 "id =" + id +
                 ", nombre ='" + nombre + '\'' +
                 ", fecha de alta ='" + fecha_alta + '\'' +
-                ", departamento ='" + departamento + '\'' +
-                //", proyectos ='" + proyectos + '\'' +
+                ", departamento ='" + departamento.getNombre() + '\'' +
+                ", proyectos ='" + proyectos.stream().map(Proyecto::getNombre) + '\'' +
                // ", commits ='" + commits + '\'' + SON MUCHOS, no interesa
                // ", issues ='" + issues + '\'' + No lo sacamos ya que en las issues ya salen los programadores activos dela misma, evitamos un bucle infinito.
                 ", tecnologias ='" + tecnologias + '\'' +

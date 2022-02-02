@@ -14,7 +14,7 @@ public class DepartamentoDTO {
     private ObjectId id;
     private String nombre;
     private Programador jefe;
-    private double  presupuesto;
+    private double presupuesto;
     private Set<Proyecto> proyectos_terminados;
     private Set<Proyecto> proyectos_activos;
     private Set<Programador> historico_jefes;
@@ -25,12 +25,11 @@ public class DepartamentoDTO {
         return "DepartamentoDTO{" +
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
-                ", jefe=" + jefe +
+                ", jefe=" + jefe.getNombre() +
                 ", presupuesto=" + presupuesto +
-                ", proyectos_terminados=" + proyectos_terminados +
-                ", proyectos_activos=" + proyectos_activos +
-                ", historicoJefes=" + historico_jefes +
-                //", historico_jefes=" + historico_jefes.stream().map(Programador::getNombre) +
+                ", proyectos_terminados=" + proyectos_terminados.stream().map(Proyecto::getNombre) +
+                ", proyectos_activos=" + proyectos_activos.stream().map(Proyecto::getNombre) +
+                ", historicoJefes=" + historico_jefes.stream().map(Programador::getNombre) +
                 '}';
     }
 }
