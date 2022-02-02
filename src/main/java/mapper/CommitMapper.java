@@ -19,14 +19,13 @@ public class CommitMapper extends BaseMapper<Commit, CommitDTO> {
 
     @Override
     public CommitDTO toDTO(Commit item) {
-        CommitDTO commitDTO = new CommitDTO();
-        commitDTO.setId(item.getId());
-        commitDTO.setProyecto(item.getProyecto());
-        commitDTO.setAutor(item.getAutor());
-        commitDTO.setFecha(item.getFecha());
-        commitDTO.setRepositorio(item.getRepositorio());
-        commitDTO.setTexto(item.getTexto());
-        commitDTO.setTitulo(item.getTitulo());
-        return commitDTO;
+        return CommitDTO.builder().
+                id(item.getId()).
+                proyecto(item.getProyecto()).
+                autor(item.getAutor()).
+                fecha(item.getFecha()).
+                repositorio(item.getRepositorio()).
+                texto(item.getTexto()).
+                titulo(item.getTitulo()).build();
     }
 }

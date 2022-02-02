@@ -9,9 +9,6 @@ import java.util.Set;
 
 @Data
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor
-
 public class DepartamentoDTO {
 
     private ObjectId id;

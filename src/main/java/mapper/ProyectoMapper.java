@@ -21,15 +21,14 @@ public class ProyectoMapper extends BaseMapper<Proyecto, ProyectoDTO> {
 
     @Override
     public ProyectoDTO toDTO(Proyecto item) {
-        ProyectoDTO proyectoDTO = new ProyectoDTO();
-        proyectoDTO.setId(item.getId());
-        proyectoDTO.setDepartamento(item.getDepartamento());
-        proyectoDTO.setJefe(item.getJefe());
-        proyectoDTO.setNombre(item.getNombre());
-        proyectoDTO.setFecha_fin(item.getFecha_fin());
-        proyectoDTO.setFecha_inicio(item.getFecha_inicio());
-        proyectoDTO.setPresupuesto(item.getPresupuesto());
-        proyectoDTO.setTecnologias(item.getTecnologias());
-        return proyectoDTO;
+        return ProyectoDTO.builder()
+        .id(item.getId())
+        .departamento(item.getDepartamento())
+        .jefe(item.getJefe())
+        .nombre(item.getNombre())
+        .fecha_fin(item.getFecha_fin())
+        .fecha_inicio(item.getFecha_inicio())
+        .presupuesto(item.getPresupuesto())
+        .tecnologias(item.getTecnologias()).build();
     }
 }

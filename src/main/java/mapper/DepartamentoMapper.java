@@ -12,9 +12,9 @@ public class DepartamentoMapper extends BaseMapper<Departamento, DepartamentoDTO
         dep.setId(item.getId());
         dep.setNombre(item.getNombre());
         dep.setJefe(item.getJefe());
-        // dep.setHistorico_jefes();
-        // dep.setProyectos_activos();
-        // dep.setProyectos_terminados();
+        dep.setHistorico_jefes(item.getHistorico_jefes());
+        dep.setProyectos_activos(item.getProyectos_activos());
+        dep.setProyectos_terminados(item.getProyectos_terminados());
         dep.setPresupuesto(item.getPresupuesto());
 
         return dep;
@@ -22,14 +22,13 @@ public class DepartamentoMapper extends BaseMapper<Departamento, DepartamentoDTO
 
     @Override
     public DepartamentoDTO toDTO(Departamento item) {
-        DepartamentoDTO depDTO = new DepartamentoDTO();
-        depDTO.setId(item.getId());
-        depDTO.setNombre(item.getNombre());
-        depDTO.setJefe(item.getJefe());
-        // dep.setHistorico_jefes();
-        // dep.setProyectos_activos();
-        // dep.setProyectos_terminados();
-        depDTO.setPresupuesto(item.getPresupuesto());
-        return depDTO;
+        return DepartamentoDTO.builder()
+                .id(item.getId())
+                .nombre(item.getNombre())
+                .jefe(item.getJefe())
+                .historico_jefes(item.getHistorico_jefes())
+                .proyectos_activos(item.getProyectos_activos())
+                .proyectos_terminados(item.getProyectos_terminados())
+                .presupuesto(item.getPresupuesto()).build();
     }
 }

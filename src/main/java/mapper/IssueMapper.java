@@ -18,13 +18,12 @@ public class IssueMapper extends BaseMapper<Issue, IssueDTO> {
 
     @Override
     public IssueDTO toDTO(Issue item) {
-        IssueDTO issueDTO = new IssueDTO();
-        issueDTO.setId(item.getId());
-        issueDTO.setTitulo(item.getTitulo());
-        issueDTO.setFecha(item.getFecha());
-        issueDTO.setProyecto(item.getProyecto());
-        issueDTO.setProgramadores(item.getProgramadores());
-        issueDTO.setTexto(item.getTexto());
-        return issueDTO;
+        return IssueDTO.builder()
+        .id(item.getId())
+        .titulo(item.getTitulo())
+        .fecha(item.getFecha())
+        .proyecto(item.getProyecto())
+        .programadores(item.getProgramadores())
+        .texto(item.getTexto()).build();
     }
 }

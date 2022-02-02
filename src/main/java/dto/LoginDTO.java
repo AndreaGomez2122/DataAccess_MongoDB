@@ -1,12 +1,14 @@
 package dto;
 
 import dao.Programador;
+import lombok.Builder;
 import lombok.Data;
 import org.bson.types.ObjectId;
 
 import java.sql.Timestamp;
 
 @Data
+@Builder
 public class LoginDTO {
     private ObjectId id;
     private Programador programador;
