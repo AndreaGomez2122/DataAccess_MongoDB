@@ -10,10 +10,9 @@
 ## :rocket: Sobre la aplicación
 
 En este ejercicio crearemos una **base de datos noSQL** con **MongoDb**. Para administrarla, hemos utilizado **JPA** con soporte de **Hibernate**.
-Al igual que en el caso anterior con SQL, crearemos el sistema de seguimiento de Proyectos informáticos de la empresa "DataAccessSL". 
+Al igual que en el caso anterior con SQL, crearemos el sistema de seguimiento de Proyectos informáticos de la empresa "DataAccessSL".
 
-La implementación sigue una arquitectura de 3 niveles, con controladores, servicios y repositorios.
-
+Este es [el esquema](https://github.com/AndreaGomez2122/DataAccess_MongoDB/blob/master/Diagrama%20y%20Explicaci%C3%B3n/UML.pdf) que seguimos en su implementación, que sigue una arquitectura de 3 niveles, con controladores, servicios y repositorios. 
 Como añadido al enunciado anterior, en este caso probaremos los test usando mocks, específicamente, a través de la herramienta "Mockito".
 
 ---
