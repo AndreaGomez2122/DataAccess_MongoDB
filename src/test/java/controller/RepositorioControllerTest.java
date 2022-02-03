@@ -1,66 +1,56 @@
 package controller;
 
-
-import dao.Departamento;
-import dao.Programador;
-import dto.DepartamentoDTO;
-import mapper.DepartamentoMapper;
+import dao.Repositorio;
+import dto.RepositorioDTO;
+import mapper.RepositorioMapper;
 import org.bson.types.ObjectId;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.jupiter.MockitoExtension;
-
-import service.DepartamentoService;
+import service.RepositorioService;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 //@ExtendWith(MockitoExtension.class)
-public class DepartamentoControllerTest {
+public class RepositorioControllerTest {
 
     //dependencia
     // @Mock
-    DepartamentoService service;
+    RepositorioService service;
 
-    DepartamentoMapper mapper;
-    DepartamentoDTO depDTO;
-    Departamento dep;
+    RepositorioMapper mapper;
+    RepositorioDTO depDTO;
+    Repositorio dep;
 
     //System under Test
     // @InjectMocks
-    DepartamentoController controller;
+    RepositorioController controller;
 
     @BeforeEach
     public void setUp() {
-        this.mapper = new DepartamentoMapper();
+        this.mapper = new RepositorioMapper();
         ObjectId id = new ObjectId();
-        depDTO = DepartamentoDTO.builder()
+        depDTO = RepositorioDTO.builder()
                 .id(id)
                 .nombre("nombre proyecto")
-                .jefe(new Programador())
-                .presupuesto(2000)
                 .build();
         dep = mapper.fromDTO(depDTO);
     }
 
 
     @Test
-    public void getAllDepartamentos() throws SQLException {
+    public void getAllRepositorios() throws SQLException {
         //given
-        List<Departamento> list = new ArrayList<>();
+        List<Repositorio> list = new ArrayList<>();
         list.add(dep);
         Mockito.when(service.findAll()).thenReturn(list);
 
         //when
-        List<Departamento> listResultado = service.findAll();
+        List<Repositorio> listResultado = service.findAll();
 
         //then
         assertEquals(list.get(0), listResultado.get(0));
@@ -73,7 +63,7 @@ public class DepartamentoControllerTest {
         Mockito.when(service.getById(depDTO.getId())).thenReturn(dep);
 
         //when
-        DepartamentoDTO resultadoDTO = service.getDepartamentoById(depDTO.getId());
+        RepositorioDTO resultadoDTO = service.getRepositorioById(depDTO.getId());
 
         //then
         assertEquals(resultadoDTO.getId(), depDTO.getId());
@@ -85,7 +75,7 @@ public class DepartamentoControllerTest {
         Mockito.when(service.save(dep)).thenReturn(dep);
 
         //when
-        DepartamentoDTO resultado = service.postDepartamento(depDTO);
+        RepositorioDTO resultado = service.postRepositorio(depDTO);
 
         //then
         assertEquals(resultado.getId(), dep.getId());
@@ -97,7 +87,7 @@ public class DepartamentoControllerTest {
         Mockito.when(service.update(dep)).thenReturn(dep);
 
         //when
-        DepartamentoDTO resultado = service.updateDepartamento(depDTO);
+        RepositorioDTO resultado = service.updateRepositorio(depDTO);
 
         //then
         assertEquals(resultado.getId(), dep.getId());
@@ -109,7 +99,7 @@ public class DepartamentoControllerTest {
         Mockito.when(service.delete(dep)).thenReturn(dep);
 
         //when
-        DepartamentoDTO resultado = service.deleteDepartamento(depDTO);
+        RepositorioDTO resultado = service.deleteRepositorio(depDTO);
 
         //then
         assertEquals(resultado.getId(), dep.getId());

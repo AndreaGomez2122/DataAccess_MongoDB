@@ -1,55 +1,44 @@
 package service;
 
-
-import dao.Departamento;
-import dao.Programador;
-import dto.DepartamentoDTO;
-import mapper.DepartamentoMapper;
+import dao.Repositorio;
+import dto.RepositorioDTO;
+import mapper.RepositorioMapper;
 import org.bson.types.ObjectId;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.jupiter.MockitoExtension;
-import repository.DepartamentoRepository;
+import repository.RepositorioRepository;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 //@ExtendWith(MockitoExtension.class)
-public class DepartamentoServiceTest {
+public class RepositorioServiceTest {
 
 
     // @Mock
-    DepartamentoRepository repository;
+    RepositorioRepository repository;
 
-    DepartamentoMapper mapper;
-    DepartamentoDTO depDTO;
-    Departamento dep;
+    RepositorioMapper mapper;
+    RepositorioDTO depDTO;
+    Repositorio dep;
 
     //System under Test
     // @InjectMocks
-    DepartamentoService service;
+    RepositorioService service;
 
     @BeforeEach
     public void setUp() {
-        // this.service = new DepartamentoService(repository);
-        this.mapper = new DepartamentoMapper();
+        // this.service = new RepositorioService(repository);
+        this.mapper = new RepositorioMapper();
         ObjectId id = new ObjectId();
-        depDTO = DepartamentoDTO.builder()
+        depDTO = RepositorioDTO.builder()
                 .id(id)
-                .nombre("nombre proyecto")
-                .jefe(new Programador())
-                .presupuesto(2000)
-                .proyectos_terminados(null)
-                .proyectos_activos(null)
-                .historico_jefes(null).build();
+                .nombre("nombre Repositorio")
+                .build();
         dep = mapper.fromDTO(depDTO);
     }
 
@@ -57,12 +46,12 @@ public class DepartamentoServiceTest {
     @Test
     void getAllTest() throws SQLException {
         //given
-        List<Departamento> list = new ArrayList<>();
+        List<Repositorio> list = new ArrayList<>();
         list.add(dep);
         Mockito.when(repository.findAll()).thenReturn(list);
 
         //when
-        List<Departamento> listResultado = service.findAll();
+        List<Repositorio> listResultado = service.findAll();
 
         //then
         assertEquals(list.get(0), listResultado.get(0));
@@ -74,7 +63,7 @@ public class DepartamentoServiceTest {
         Mockito.when(repository.getById(depDTO.getId())).thenReturn(dep);
 
         //when
-        DepartamentoDTO resultadoDTO = service.getDepartamentoById(depDTO.getId());
+        RepositorioDTO resultadoDTO = service.getRepositorioById(depDTO.getId());
 
         //then
         assertEquals(resultadoDTO.getId(), depDTO.getId());
@@ -86,7 +75,7 @@ public class DepartamentoServiceTest {
         Mockito.when(repository.save(dep)).thenReturn(dep);
 
         //when
-        DepartamentoDTO resultado = service.postDepartamento(depDTO);
+        RepositorioDTO resultado = service.postRepositorio(depDTO);
 
         //then
         assertEquals(resultado.getId(), dep.getId());
@@ -98,7 +87,7 @@ public class DepartamentoServiceTest {
         Mockito.when(repository.update(dep)).thenReturn(dep);
 
         //when
-        DepartamentoDTO resultado = service.updateDepartamento(depDTO);
+        RepositorioDTO resultado = service.updateRepositorio(depDTO);
 
         //then
         assertEquals(resultado.getId(), dep.getId());
@@ -110,7 +99,7 @@ public class DepartamentoServiceTest {
         Mockito.when(repository.delete(dep)).thenReturn(dep);
 
         //when
-        DepartamentoDTO resultado= service.deleteDepartamento(depDTO);
+        RepositorioDTO resultado = service.deleteRepositorio(depDTO);
 
         //then
         assertEquals(resultado.getId(), dep.getId());

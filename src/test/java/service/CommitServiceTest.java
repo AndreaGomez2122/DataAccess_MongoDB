@@ -1,55 +1,45 @@
 package service;
 
-
-import dao.Departamento;
-import dao.Programador;
-import dto.DepartamentoDTO;
-import mapper.DepartamentoMapper;
+import dao.Commit;
+import dto.CommitDTO;
+import mapper.CommitMapper;
 import org.bson.types.ObjectId;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.jupiter.MockitoExtension;
-import repository.DepartamentoRepository;
+import repository.CommitRepository;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 //@ExtendWith(MockitoExtension.class)
-public class DepartamentoServiceTest {
+public class CommitServiceTest {
 
 
     // @Mock
-    DepartamentoRepository repository;
+    CommitRepository repository;
 
-    DepartamentoMapper mapper;
-    DepartamentoDTO depDTO;
-    Departamento dep;
+    CommitMapper mapper;
+    CommitDTO depDTO;
+    Commit dep;
 
     //System under Test
     // @InjectMocks
-    DepartamentoService service;
+    CommitService service;
 
     @BeforeEach
     public void setUp() {
-        // this.service = new DepartamentoService(repository);
-        this.mapper = new DepartamentoMapper();
+        // this.service = new CommitService(repository);
+        this.mapper = new CommitMapper();
         ObjectId id = new ObjectId();
-        depDTO = DepartamentoDTO.builder()
+        depDTO = CommitDTO.builder()
                 .id(id)
-                .nombre("nombre proyecto")
-                .jefe(new Programador())
-                .presupuesto(2000)
-                .proyectos_terminados(null)
-                .proyectos_activos(null)
-                .historico_jefes(null).build();
+                .titulo("nombre commit")
+                .texto("texto commit")
+                .build();
         dep = mapper.fromDTO(depDTO);
     }
 
@@ -57,12 +47,12 @@ public class DepartamentoServiceTest {
     @Test
     void getAllTest() throws SQLException {
         //given
-        List<Departamento> list = new ArrayList<>();
+        List<Commit> list = new ArrayList<>();
         list.add(dep);
         Mockito.when(repository.findAll()).thenReturn(list);
 
         //when
-        List<Departamento> listResultado = service.findAll();
+        List<Commit> listResultado = service.findAll();
 
         //then
         assertEquals(list.get(0), listResultado.get(0));
@@ -74,7 +64,7 @@ public class DepartamentoServiceTest {
         Mockito.when(repository.getById(depDTO.getId())).thenReturn(dep);
 
         //when
-        DepartamentoDTO resultadoDTO = service.getDepartamentoById(depDTO.getId());
+        CommitDTO resultadoDTO = service.getCommitById(depDTO.getId());
 
         //then
         assertEquals(resultadoDTO.getId(), depDTO.getId());
@@ -86,7 +76,7 @@ public class DepartamentoServiceTest {
         Mockito.when(repository.save(dep)).thenReturn(dep);
 
         //when
-        DepartamentoDTO resultado = service.postDepartamento(depDTO);
+        CommitDTO resultado = service.postCommit(depDTO);
 
         //then
         assertEquals(resultado.getId(), dep.getId());
@@ -98,7 +88,7 @@ public class DepartamentoServiceTest {
         Mockito.when(repository.update(dep)).thenReturn(dep);
 
         //when
-        DepartamentoDTO resultado = service.updateDepartamento(depDTO);
+        CommitDTO resultado = service.updateCommit(depDTO);
 
         //then
         assertEquals(resultado.getId(), dep.getId());
@@ -110,7 +100,7 @@ public class DepartamentoServiceTest {
         Mockito.when(repository.delete(dep)).thenReturn(dep);
 
         //when
-        DepartamentoDTO resultado= service.deleteDepartamento(depDTO);
+        CommitDTO resultado = service.deleteCommit(depDTO);
 
         //then
         assertEquals(resultado.getId(), dep.getId());

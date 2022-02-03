@@ -1,66 +1,57 @@
 package controller;
 
-
-import dao.Departamento;
+import dao.Commit;
 import dao.Programador;
-import dto.DepartamentoDTO;
-import mapper.DepartamentoMapper;
+import dto.CommitDTO;
+import mapper.CommitMapper;
 import org.bson.types.ObjectId;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.jupiter.MockitoExtension;
-
-import service.DepartamentoService;
+import service.CommitService;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 //@ExtendWith(MockitoExtension.class)
-public class DepartamentoControllerTest {
+public class CommitControllerTest {
 
     //dependencia
     // @Mock
-    DepartamentoService service;
+    CommitService service;
 
-    DepartamentoMapper mapper;
-    DepartamentoDTO depDTO;
-    Departamento dep;
+    CommitMapper mapper;
+    CommitDTO depDTO;
+    Commit dep;
 
     //System under Test
     // @InjectMocks
-    DepartamentoController controller;
+    CommitController controller;
 
     @BeforeEach
     public void setUp() {
-        this.mapper = new DepartamentoMapper();
+        this.mapper = new CommitMapper();
         ObjectId id = new ObjectId();
-        depDTO = DepartamentoDTO.builder()
+        depDTO = CommitDTO.builder()
                 .id(id)
-                .nombre("nombre proyecto")
-                .jefe(new Programador())
-                .presupuesto(2000)
+                .titulo("nombre proyecto")
                 .build();
         dep = mapper.fromDTO(depDTO);
     }
 
 
     @Test
-    public void getAllDepartamentos() throws SQLException {
+    public void getAllCommits() throws SQLException {
         //given
-        List<Departamento> list = new ArrayList<>();
+        List<Commit> list = new ArrayList<>();
         list.add(dep);
         Mockito.when(service.findAll()).thenReturn(list);
 
         //when
-        List<Departamento> listResultado = service.findAll();
+        List<Commit> listResultado = service.findAll();
 
         //then
         assertEquals(list.get(0), listResultado.get(0));
@@ -73,7 +64,7 @@ public class DepartamentoControllerTest {
         Mockito.when(service.getById(depDTO.getId())).thenReturn(dep);
 
         //when
-        DepartamentoDTO resultadoDTO = service.getDepartamentoById(depDTO.getId());
+        CommitDTO resultadoDTO = service.getCommitById(depDTO.getId());
 
         //then
         assertEquals(resultadoDTO.getId(), depDTO.getId());
@@ -85,7 +76,7 @@ public class DepartamentoControllerTest {
         Mockito.when(service.save(dep)).thenReturn(dep);
 
         //when
-        DepartamentoDTO resultado = service.postDepartamento(depDTO);
+        CommitDTO resultado = service.postCommit(depDTO);
 
         //then
         assertEquals(resultado.getId(), dep.getId());
@@ -97,7 +88,7 @@ public class DepartamentoControllerTest {
         Mockito.when(service.update(dep)).thenReturn(dep);
 
         //when
-        DepartamentoDTO resultado = service.updateDepartamento(depDTO);
+        CommitDTO resultado = service.updateCommit(depDTO);
 
         //then
         assertEquals(resultado.getId(), dep.getId());
@@ -109,7 +100,7 @@ public class DepartamentoControllerTest {
         Mockito.when(service.delete(dep)).thenReturn(dep);
 
         //when
-        DepartamentoDTO resultado = service.deleteDepartamento(depDTO);
+        CommitDTO resultado = service.deleteCommit(depDTO);
 
         //then
         assertEquals(resultado.getId(), dep.getId());
