@@ -18,7 +18,7 @@ import java.util.*;
         // Todos los usuarios con id indicados, ojo, no usar parámetros
         @NamedQuery(name = "Programador.getById", query = "SELECT p FROM Programador p WHERE p.id = :id"),
         // Todos los post de un usuario
-       // @NamedQuery(name = "User.getMyPosts", query = "SELECT u.posts FROM User u WHERE u.id = :userId")
+       // @NamedQuery(name = "User.getMyPosts", query = "SELECT u.p FROM Programador u WHERE u.id = :userId")
 })
 public class Programador {
     private ObjectId id;
