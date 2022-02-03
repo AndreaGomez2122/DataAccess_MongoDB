@@ -16,13 +16,13 @@ public class App {
             accesData.initDataBase();
 
         // Departamentos
-       accesData.departamentos();
+        accesData.departamentos();
 
         // Proyectos
-       accesData.proyectos();
+        accesData.proyectos();
 
         // Programadores
-       accesData.programadores();
+        accesData.programadores();
 
         // Repositorios
         accesData.repositorios();
@@ -34,9 +34,9 @@ public class App {
         accesData.issues();
 
         // Commits
-       // accesData.Comments();
+        // accesData.Comments();
     }
-    }
+}
 
 
 

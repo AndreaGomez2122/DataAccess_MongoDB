@@ -28,21 +28,34 @@ public class DepartamentoRepositoryTest {
     }
 
     @Test
-    void findAllOK() {
+    void testGetAll() {
         List<Departamento> list = repository.findAll();
+        ObjectId id = new ObjectId("5bf142459b72e12b2b1b2cd");
         Assertions.assertAll(
                 () -> Assertions.assertNotEquals(list, null),
-                () -> Assertions.assertTrue(list.size() > 0)
+                () -> Assertions.assertTrue(list.size() > 0),
+                () -> Assertions.assertEquals(list.get(0).getId(), id)
         );
     }
 
     @Test
     public void testGet() throws SQLException {
-        //Faltaría meter una id real
-
-        ObjectId id = null;
+        ObjectId id = new ObjectId("5bf142459b72e12b2b1b2cd");
         Departamento dep = repository.getById(id);
         Assertions.assertEquals(dep.getId(), id);
+    }
+
+    @Test
+    void getException() {
+        ObjectId id = new ObjectId();
+        Exception exception = Assertions.assertThrows(SQLException.class, () -> {
+            repository.getById(id);
+        });
+
+        String expectedMessage = "Error DepartamentoRepository";
+        String actualMessage = exception.getMessage();
+
+        Assertions.assertTrue(actualMessage.contains(expectedMessage));
     }
 
     @Test
@@ -53,10 +66,10 @@ public class DepartamentoRepositoryTest {
         Assertions.assertEquals(dep, repository.save(dep));
     }
 
+
     @Test
     public void testUpdate() throws SQLException {
-        //Faltaría meter una id real
-        ObjectId id = null;
+        ObjectId id = new ObjectId("5bf142459b72e12b2b1b2cd");
         Departamento dep = new Departamento();
         dep.setId(id);
         dep.setNombre("departamentoTest");
@@ -72,13 +85,27 @@ public class DepartamentoRepositoryTest {
 
     @Test
     public void testDelete() throws SQLException {
-        //Faltaría meter una id real
-        ObjectId id = null;
+        ObjectId id = new ObjectId("5bf142459b72e12b2b1b2cd");
         Departamento dep = new Departamento();
         dep.setId(id);
         dep.setNombre("departamentoTest");
         dep.setPresupuesto(2000);
         Assertions.assertEquals(dep, repository.delete(dep));
+    }
+
+    @Test
+    void createException() {
+        ObjectId id = new ObjectId();
+        Departamento dep = new Departamento();
+        dep.setId(id);
+        Exception exception = Assertions.assertThrows(SQLException.class, () -> {
+            repository.delete(dep);
+        });
+
+        String expectedMessage = "Error DepartamentoRepository";
+        String actualMessage = exception.getMessage();
+
+        Assertions.assertTrue(actualMessage.contains(expectedMessage));
     }
 }
 
