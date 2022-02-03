@@ -3,10 +3,7 @@ package dto;
 import dao.Programador;
 import dao.Proyecto;
 import dao.Repositorio;
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.bson.types.ObjectId;
 
 import java.util.Date;

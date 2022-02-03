@@ -140,9 +140,9 @@ public class Departamento {
                 ", nombre='" + nombre + '\'' +
                 ", jefe='" + jefe + '\'' +
                 ", presupuesto='" + presupuesto + '\'' +
-                ", proyectos terminados =" + proyectos_terminados +
-                ", proyectos en curso =" + proyectos_activos +
-                ", historico de jefes=" + historico_jefes +
+                ", proyectos terminados =" + proyectos_terminados.stream().map(Proyecto::getNombre) +
+                ", proyectos en curso =" + proyectos_activos.stream().map(Proyecto::getNombre) +
+                ", historico de jefes=" + historico_jefes.stream().map(Programador::getNombre) +
 
                 '}';
     }

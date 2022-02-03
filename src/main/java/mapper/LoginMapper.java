@@ -18,12 +18,11 @@ public class LoginMapper extends BaseMapper<Login, LoginDTO> {
 
     @Override
     public LoginDTO toDTO(Login item) {
-        LoginDTO loginDTO = new LoginDTO();
-        loginDTO.setId(item.getId());
-        loginDTO.setToken(item.getToken());
-        loginDTO.setActivo(item.isActivo());
-        loginDTO.setInstante(item.getInstante());
-        loginDTO.setProgramador(item.getProgramador());
-        return loginDTO;
+        return LoginDTO.builder()
+        .id(item.getId())
+        .token(item.getToken())
+        .activo(item.isActivo())
+        .instante(item.getInstante())
+        .programador(item.getProgramador()).build();
     }
 }

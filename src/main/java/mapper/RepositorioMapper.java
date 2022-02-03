@@ -19,13 +19,12 @@ public class RepositorioMapper extends BaseMapper<Repositorio, RepositorioDTO> {
 
     @Override
     public RepositorioDTO toDTO(Repositorio item) {
-        RepositorioDTO repositorioDTO = new RepositorioDTO();
-        repositorioDTO.setId(item.getId());
-        repositorioDTO.setCommits(item.getCommits());
-        repositorioDTO.setNombre(item.getNombre());
-        repositorioDTO.setIssues(item.getIssues());
-        repositorioDTO.setProyecto(item.getProyecto());
-        repositorioDTO.setFecha_creacion(item.getFecha_creacion());
-        return repositorioDTO;
+        return RepositorioDTO.builder()
+        .id(item.getId())
+        .commits(item.getCommits())
+        .nombre(item.getNombre())
+        .issues(item.getIssues())
+        .proyecto(item.getProyecto())
+        .fecha_creacion(item.getFecha_creacion()).build();
     }
 }

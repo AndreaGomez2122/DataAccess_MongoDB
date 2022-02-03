@@ -23,17 +23,16 @@ public class ProgramadorMapper extends BaseMapper<Programador, ProgramadorDTO> {
 
     @Override
     public ProgramadorDTO toDTO(Programador item) {
-        ProgramadorDTO progDTO = new ProgramadorDTO();
-        progDTO.setId(item.getId());
-        progDTO.setCommits(item.getCommits());
-        progDTO.setIssues(item.getIssues());
-        progDTO.setNombre(item.getNombre());
-        progDTO.setContraseña(item.getContraseña());
-        progDTO.setDepartamento(item.getDepartamento());
-        progDTO.setSalario(item.getSalario());
-        progDTO.setTecnologias(item.getTecnologias());
-        progDTO.setFecha_alta(item.getFecha_alta());
-        progDTO.setProyectos(item.getProyectos());
-        return progDTO;
+        return ProgramadorDTO.builder()
+        .id(item.getId())
+        .commits(item.getCommits())
+        .issues(item.getIssues())
+        .nombre(item.getNombre())
+        .contraseña(item.getContraseña())
+        .departamento(item.getDepartamento())
+        .salario(item.getSalario())
+        .tecnologias(item.getTecnologias())
+        .fecha_alta(item.getFecha_alta())
+        .proyectos(item.getProyectos()).build();
     }
 }
