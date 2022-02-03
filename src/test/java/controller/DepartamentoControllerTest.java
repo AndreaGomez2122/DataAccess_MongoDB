@@ -21,13 +21,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
-//@ExtendWith(MockitoExtension.class)
+
+@ExtendWith(MockitoExtension.class)
 public class DepartamentoControllerTest {
 
     //dependencia
-    // @Mock
+    @Mock
     DepartamentoService service;
 
     DepartamentoMapper mapper;
@@ -35,7 +35,7 @@ public class DepartamentoControllerTest {
     Departamento dep;
 
     //System under Test
-    // @InjectMocks
+    @InjectMocks
     DepartamentoController controller;
 
     @BeforeEach
@@ -60,10 +60,10 @@ public class DepartamentoControllerTest {
         Mockito.when(service.findAll()).thenReturn(list);
 
         //when
-        List<Departamento> listResultado = service.findAll();
+        List<DepartamentoDTO> listResultado = controller.getAllDepartamentos();
 
         //then
-        assertEquals(list.get(0), listResultado.get(0));
+        assertEquals(list.get(0).getId(), listResultado.get(0).getId());
 
     }
 
@@ -73,7 +73,7 @@ public class DepartamentoControllerTest {
         Mockito.when(service.getById(depDTO.getId())).thenReturn(dep);
 
         //when
-        DepartamentoDTO resultadoDTO = service.getDepartamentoById(depDTO.getId());
+        DepartamentoDTO resultadoDTO = controller.getDepartamentoById(depDTO.getId());
 
         //then
         assertEquals(resultadoDTO.getId(), depDTO.getId());
@@ -85,7 +85,7 @@ public class DepartamentoControllerTest {
         Mockito.when(service.save(dep)).thenReturn(dep);
 
         //when
-        DepartamentoDTO resultado = service.postDepartamento(depDTO);
+        DepartamentoDTO resultado = controller.postDepartamento(depDTO);
 
         //then
         assertEquals(resultado.getId(), dep.getId());
@@ -97,7 +97,7 @@ public class DepartamentoControllerTest {
         Mockito.when(service.update(dep)).thenReturn(dep);
 
         //when
-        DepartamentoDTO resultado = service.updateDepartamento(depDTO);
+        DepartamentoDTO resultado = controller.updateDepartamento(depDTO);
 
         //then
         assertEquals(resultado.getId(), dep.getId());

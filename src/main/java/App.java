@@ -1,3 +1,4 @@
+import autenticacion.Tokenizer;
 import controller.DepartamentoController;
 import dto.DepartamentoDTO;
 import utils.ApplicationProperties;
@@ -7,7 +8,7 @@ import java.util.List;
 public class App {
 
     public static void main(String[] args) {
-
+        Tokenizer t=new Tokenizer(); t.generateToken(); t.comprobarToken("f");
         ApplicationProperties properties = new ApplicationProperties();
         System.out.println("Bienvenid@s a " +
                 properties.readProperty("app.title") + " "

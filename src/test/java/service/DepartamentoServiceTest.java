@@ -22,19 +22,18 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-//@ExtendWith(MockitoExtension.class)
+@ExtendWith(MockitoExtension.class)
 public class DepartamentoServiceTest {
-
-
-    // @Mock
-    DepartamentoRepository repository;
-
     DepartamentoMapper mapper;
     DepartamentoDTO depDTO;
     Departamento dep;
 
+    //Dependencias
+    @Mock
+    DepartamentoRepository repository;
+
     //System under Test
-    // @InjectMocks
+    @InjectMocks
     DepartamentoService service;
 
     @BeforeEach
@@ -56,6 +55,7 @@ public class DepartamentoServiceTest {
 
     @Test
     void getAllTest() throws SQLException {
+
         //given
         List<Departamento> list = new ArrayList<>();
         list.add(dep);
