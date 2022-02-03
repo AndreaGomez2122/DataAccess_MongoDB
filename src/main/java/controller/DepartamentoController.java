@@ -1,6 +1,10 @@
 package controller;
 
+import dao.Programador;
+import dao.Proyecto;
 import dto.DepartamentoDTO;
+import dto.ProgramadorDTO;
+import dto.ProyectoDTO;
 import manager.HibernateController;
 import org.bson.types.ObjectId;
 import repository.DepartamentoRepository;
@@ -9,6 +13,7 @@ import service.DepartamentoService;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 public class DepartamentoController {
     private static DepartamentoController controller = null;
@@ -83,6 +88,17 @@ public class DepartamentoController {
             return Optional.empty();
         }
     }
+
+
+    //Obtener de un departamento los proyectos (informacion completa) y trabajadores asociados con sus datos completos
+
+    public Set<Proyecto>getProyectsByDepartment(ObjectId id){
+        //Devuelve lista de proyectosDTO que incorpora una lista de programadores
+        Set<Proyecto> listaProyectos;
+        return listaProyectos= getDepartamentoById(id).getProyectos_activos();
+
+    }
+
 
 
 

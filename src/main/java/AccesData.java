@@ -6,6 +6,7 @@ import controller.*;
 import dao.*;
 import dto.*;
 import manager.HibernateController;
+import org.bson.types.ObjectId;
 
 import java.util.*;
 
@@ -332,7 +333,6 @@ public class AccesData {
     }
 
 
-
     public void commits() {
         System.out.println("INICIO COMMITS");
 
@@ -349,7 +349,7 @@ public class AccesData {
         CommitDTO commitDTO = CommitDTO.builder()
                 .titulo("Actualizacion clase CommitRepository")
                 .texto("Se actualizan los metodos crud de la clase CommitRepository")
-                .fecha(new Date(2020,10,02))
+                .fecha(new Date(2020, 10, 02))
                 .repositorio(r1)
                 .proyecto(pr2)
                 .autor(p2)
@@ -358,7 +358,7 @@ public class AccesData {
         System.out.println(commitDTO);
 
 
-        CommitDTO commitDTO1= CommitDTO.builder()
+        CommitDTO commitDTO1 = CommitDTO.builder()
 
                 .build();
         commitDTO1 = commitController.postCommit(commitDTO1);
@@ -385,7 +385,6 @@ public class AccesData {
     }
 
 
-
     public void issues() {
         System.out.println("INICIO ISSUES");
 
@@ -402,7 +401,7 @@ public class AccesData {
         IssueDTO issueDTO = IssueDTO.builder()
                 .titulo("Problema clase issueRepositorio")
                 .texto("StackOverFlow en metodo edit")
-                .fecha(new Date(2020,10,02))
+                .fecha(new Date(2020, 10, 02))
                 .programadores(new HashSet<Programador>(Arrays.asList(p1, p2)))
                 .proyecto(pr2)
                 .repositorio(r1)
@@ -412,7 +411,7 @@ public class AccesData {
         System.out.println(issueDTO);
 
 
-        IssueDTO issueDTO1= IssueDTO.builder()
+        IssueDTO issueDTO1 = IssueDTO.builder()
 
                 .build();
         issueDTO1 = issueController.postIssue(issueDTO1);
@@ -436,6 +435,25 @@ public class AccesData {
 
 
         System.out.println("FIN ISSUES");
+    }
+
+    public void getProyectsByDepartment(ObjectId idDepartamento) {
+        System.out.println("CONSULTAS PERSONALIZADAS");
+        System.out.println("OBTENER DE UN DEPARTAMENTO LOS PROYECTOS Y LOS PROGRAMADORES ASOCIADOS A CADA PROYECTO");
+
+        DepartamentoController departamentoController = DepartamentoController.getInstance();
+        ProyectoController proyectoController = ProyectoController.getInstance();
+        Set<Proyecto> proyectsByDepartment = departamentoController.getProyectsByDepartment(idDepartamento);
+        Set<ProgramadorDTO> programadorsByProject = new HashSet();
+
+
+        for (Proyecto p:proyectsByDepartment
+             ) {
+            programadorsByProject.addAll(proyectoController.getProgramadorsByProject(p.getId()));
+            System.out.println("Proyecto---> " + p.toString() + " programadores -->" + proyectoController.getProgramadorsByProject(p.getId()));
+        }
+
+
     }
 
 

@@ -1,14 +1,14 @@
 package controller;
 
 import dto.DepartamentoDTO;
+import dto.ProgramadorDTO;
 import dto.ProyectoDTO;
 import org.bson.types.ObjectId;
 import repository.ProyectoRepository;
 import service.ProyectoService;
 
 import java.sql.SQLException;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class ProyectoController {
     private static ProyectoController controller = null;
@@ -82,4 +82,25 @@ public class ProyectoController {
             return Optional.empty();
         }
     }
+
+
+    //GET ALL PROGRAMADORES BY PROYECTO
+    public Set<ProgramadorDTO> getProgramadorsByProject(ObjectId idProyecto) {
+        ProgramadorController p = ProgramadorController.getInstance();
+        ProyectoController proyectoController = ProyectoController.getInstance();
+        List<ProgramadorDTO> pr = p.getAllProgramadors();
+        Set<ProgramadorDTO> programadores =new HashSet<>();
+        ProyectoDTO proyectoDTO = proyectoController.getProyectoById(idProyecto);
+        for (ProgramadorDTO programadorDTO:pr
+             ) {
+
+            if(programadorDTO.getProyectos().contains(proyectoDTO)){
+                programadores.add(programadorDTO);
+            }
+
+        }
+        return programadores;
+
+    }
+
 }
