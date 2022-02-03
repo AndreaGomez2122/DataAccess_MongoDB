@@ -6,6 +6,7 @@
 
 ---
 
+
 ## :rocket: Sobre la aplicación
 
 En este ejercicio crearemos una **base de datos noSQL** con **MongoDb**. Para administrarla, hemos utilizado **JPA** con soporte de **Hibernate**.
@@ -41,3 +42,5 @@ java -jar DataAccess_MongoDB.jar
 
 Una vez que el programa se haya ejecutado se habrá creado un volumen con dos imágenes en docker, si todo ha ido bien también se han iniciado.
 Sólo se debe introducir localhost:8081 en el navegador y tendrás una vista de la base de datos.
+
+![bdcompass](https://user-images.githubusercontent.com/80425131/152405619-8c615bfe-6959-4eb5-bb00-415a99bba77e.png)
