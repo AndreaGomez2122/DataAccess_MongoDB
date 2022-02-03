@@ -147,11 +147,12 @@ public class Proyecto {
         return "Proyecto{" +
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
-                ", jefe='" + jefe.getNombre() + '\'' +
+              //  ", jefe='" + jefe.getNombre() + '\'' +
                 ", presupuesto='" + presupuesto + '\'' +
                 ", fecha inicio =" + fecha_inicio +
                 ", fecha fin =" + fecha_fin +
-                ", tecnologias=" + tecnologias +
+                //", tecnologias=" + tecnologias.stream().map(Tecnologia::getNombre) +
+               // ", tecnologias=" + tecnologias.toString() +
                ", repositorio=" + repositorio.getNombre()+
                 ", departamento=" + departamento.getNombre() +
                 '}';

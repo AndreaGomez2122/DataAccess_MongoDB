@@ -81,7 +81,7 @@ public class Departamento {
     }
 
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "departamento", orphanRemoval = true, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "departamento", orphanRemoval = true, cascade = CascadeType.MERGE)
     public Set<Proyecto> getProyectos_terminados() {
         return proyectos_terminados;
     }
@@ -90,7 +90,7 @@ public class Departamento {
         this.proyectos_terminados = proyectos_terminados;
     }
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "departamento", orphanRemoval = true, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "departamento", orphanRemoval = true, cascade = CascadeType.MERGE)
     public Set<Proyecto> getProyectos_activos() {
         return proyectos_activos;
     }
@@ -99,7 +99,7 @@ public class Departamento {
         this.proyectos_activos = proyectos_activos;
     }
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "departamento", orphanRemoval = true, cascade = CascadeType.PERSIST)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "departamento", orphanRemoval = true, cascade = CascadeType.MERGE)
     public Set<Programador> getHistorico_jefes() {
         return historico_jefes;
     }
@@ -138,7 +138,7 @@ public class Departamento {
         return "Departamento{" +
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
-                ", jefe='" + jefe + '\'' +
+                ", jefe='" + jefe.getNombre() + '\'' +
                 ", presupuesto='" + presupuesto + '\'' +
                 ", proyectos terminados =" + proyectos_terminados.stream().map(Proyecto::getNombre) +
                 ", proyectos en curso =" + proyectos_activos.stream().map(Proyecto::getNombre) +

@@ -23,13 +23,15 @@ public class DepartamentoDTO {
     @Override
     public String toString() {
         return "DepartamentoDTO{" +
+
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
-                ", jefe=" + jefe.getNombre() +
-                ", presupuesto=" + presupuesto +
-                ", proyectos_terminados=" + proyectos_terminados.stream().map(Proyecto::getNombre) +
-                ", proyectos_activos=" + proyectos_activos.stream().map(Proyecto::getNombre) +
-                ", historicoJefes=" + historico_jefes.stream().map(Programador::getNombre) +
+                ", jefe='" + jefe.getNombre() + '\'' +
+                ", presupuesto='" + presupuesto + '\'' +
+                ", proyectos terminados =" + proyectos_terminados.stream().map(Proyecto::getNombre) +
+                ", proyectos en curso =" + proyectos_activos.stream().map(Proyecto::getNombre) +
+                //", historico de jefes=" + historico_jefes.stream().map(Programador::getNombre) +
+
                 '}';
     }
 }

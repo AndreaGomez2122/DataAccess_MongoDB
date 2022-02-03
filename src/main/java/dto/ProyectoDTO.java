@@ -33,7 +33,7 @@ public class ProyectoDTO {
                 ", presupuesto=" + presupuesto +
                 ", fecha_inicio=" + fecha_inicio +
                 ", fecha_fin=" + fecha_fin +
-                ", tecnologias=" + tecnologias +
+               // ", tecnologias=" + tecnologias +
                 ", repositorio=" + repositorio.getNombre() +
                 ", departamento=" + departamento.getNombre() +
                 '}';

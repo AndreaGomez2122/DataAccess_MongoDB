@@ -20,6 +20,8 @@ public class AccesData {
     Proyecto pr2;
     Proyecto pr3;
     Repositorio r1;
+    Repositorio r2;
+    Repositorio r3;
     Commit c1;
     Issue i1;
 
@@ -77,7 +79,11 @@ public class AccesData {
         System.out.println("Insertando Repositorios de Ejemplo");
         hc.getTransaction().begin();
         r1 = new Repositorio("Bankia web repository", new Date(2021, 01, 20), pr1);
+        r2 = new Repositorio("Santander web repository", new Date(2021, 01, 20), pr2);
+        r3 = new Repositorio("app firma repository", new Date(2021, 01, 20), pr2);
         hc.getManager().persist(r1);
+        hc.getManager().persist(r2);
+        hc.getManager().persist(r3);
         hc.getTransaction().commit();
 
         // Commit
@@ -95,6 +101,28 @@ public class AccesData {
         hc.getManager().persist(i1);
         hc.getTransaction().commit();
 
+
+
+        System.out.println("Añadiendo jefes a los departamentos");
+        hc.getTransaction().begin();
+        d1.setJefe(p1);
+        d2.setJefe(p1);
+        hc.getManager().persist(d1);
+        hc.getManager().persist(d2);
+        hc.getTransaction().commit();
+
+
+
+        System.out.println("Añadiendo repositorio a los proyectos");
+        hc.getTransaction().begin();
+        pr1.setRepositorio(r1);
+        pr2.setRepositorio(r2);
+        pr3.setRepositorio(r3);
+
+        hc.getManager().persist(pr1);
+        hc.getManager().persist(pr2);
+        hc.getManager().persist(pr3);
+        hc.getTransaction().commit();
 
         hc.close();
 
@@ -132,29 +160,32 @@ public class AccesData {
 
         System.out.println("GET Todos los departamentos");
         List<DepartamentoDTO> lista = departamentoController.getAllDepartamentos();
-        System.out.println(lista);
+        System.out.println(lista.toString());
 
         System.out.println("GET Departamento con ID: " + lista.get(1).getId()); // Mira en el explorador a ver que categoría hay
-        System.out.println(departamentoController.getDepartamentoById(lista.get(1).getId()));
+        System.out.println(departamentoController.getDepartamentoById(lista.get(1).getId()).toString());
 
-
+        System.out.println("Post departamentos");
         DepartamentoDTO departamentoDTO = DepartamentoDTO.builder()
                 .nombre("Nuevo departamento")
                 .jefe(p1)
                 .presupuesto(250000)
                 .proyectos_activos(new HashSet<Proyecto>(Arrays.asList(pr1)))
+                .proyectos_terminados((new HashSet<Proyecto>(Arrays.asList(pr2))))
                 .build();
-        departamentoDTO = departamentoController.postDepartamento(departamentoDTO);
-        System.out.println(departamentoDTO);
+        DepartamentoDTO d = departamentoController.postDepartamento(departamentoDTO);
+        System.out.println(departamentoDTO.toString());
 
 
         DepartamentoDTO departamentoDTO1 = DepartamentoDTO.builder()
                 .nombre("Nuevo departamento 1")
                 .jefe(p1)
                 .presupuesto(250000)
+                .proyectos_activos(new HashSet<Proyecto>(Arrays.asList(pr1)))
+                .proyectos_terminados((new HashSet<Proyecto>(Arrays.asList(pr2))))
                 .build();
-        departamentoDTO1 = departamentoController.postDepartamento(departamentoDTO1);
-        System.out.println(departamentoDTO1);
+        DepartamentoDTO d1 = departamentoController.postDepartamento(departamentoDTO1);
+        System.out.println(departamentoDTO1.toString());
 
 
         //No actualiza el departamento
@@ -186,35 +217,46 @@ public class AccesData {
 
         System.out.println("GET Todos los proyectos");
         List<ProyectoDTO> lista = proyectoController.getAllProyectos();
-        System.out.println(lista);
+        System.out.println(lista.toString());
 
         System.out.println("GET Proyecto con ID: " + lista.get(1).getId());
-        System.out.println(proyectoController.getProyectoById(lista.get(1).getId()));
+        System.out.println(proyectoController.getProyectoById(lista.get(1).getId()).toString());
 
 
         ProyectoDTO proyectoDTO = ProyectoDTO.builder()
                 .nombre("Nuevo proyecto")
                 .jefe(p1)
                 .presupuesto(250000)
+                .fecha_inicio(new Date(2020,10,12))
+                .fecha_fin(new Date(2020,10,12))
+                .departamento(d1)
+                .repositorio(r1)
+                .tecnologias(new HashSet<Tecnologia>(Arrays.asList(Tecnologia.ANGULAR)))
                 .build();
-        proyectoDTO = proyectoController.postProyecto(proyectoDTO);
-        System.out.println(proyectoDTO);
+        ProyectoDTO p = proyectoController.postProyecto(proyectoDTO);
+        //System.out.println(proyectoDTO.toString());
 
 
         ProyectoDTO proyectoDTO1 = ProyectoDTO.builder()
                 .nombre("Nuevo proyecto 1")
                 .jefe(p1)
                 .presupuesto(250000)
+                .fecha_inicio(new Date(2020,10,12))
+                .fecha_fin(new Date(2020,10,12))
+                .departamento(d1)
+                .repositorio(r1)
+                .tecnologias()
                 .build();
-        proyectoDTO1 = proyectoController.postProyecto(proyectoDTO1);
-        System.out.println(proyectoDTO1);
+        ProyectoDTO p1 = proyectoController.postProyecto(proyectoDTO1);
+
+       // System.out.println(proyectoDTO1.toString());
 
 
         System.out.println("UPDATE Proyecto con ID:" + proyectoDTO1.getId());
         Optional<ProyectoDTO> optionalProyectoDTO = proyectoController.getProyectoByIdOptional(proyectoDTO1.getId());
         if (optionalProyectoDTO.isPresent()) {
             optionalProyectoDTO.get().setNombre("Proyecto actualizado");
-            System.out.println(proyectoController.updateProyecto(optionalProyectoDTO.get()));
+            System.out.println(proyectoController.updateProyecto(optionalProyectoDTO.get()).toString());
         }
 
 
@@ -222,7 +264,7 @@ public class AccesData {
         optionalProyectoDTO = proyectoController.getProyectoByIdOptional(proyectoDTO.getId());
         if (optionalProyectoDTO.isPresent()) {
             System.out.println(optionalProyectoDTO.get().toString());
-            System.out.println(proyectoController.deleteProyecto(optionalProyectoDTO.get()));
+            System.out.println(proyectoController.deleteProyecto(optionalProyectoDTO.get()).toString());
         }
 
 
@@ -237,7 +279,7 @@ public class AccesData {
 
         System.out.println("GET Todos los programadores");
         List<ProgramadorDTO> lista = programadorController.getAllProgramadors();
-        System.out.println(lista);
+        System.out.println(lista.toString());
 
         System.out.println("GET Programador con ID: " + lista.get(1).getId());
         System.out.println(programadorController.getProgramadorById(lista.get(1).getId()));
@@ -250,8 +292,8 @@ public class AccesData {
                 .salario(4000)
                 .contraseña("1234")
                 .build();
-        programadorDTO = programadorController.postProgramador(programadorDTO);
-        System.out.println(programadorDTO);
+        ProgramadorDTO pr = programadorController.postProgramador(programadorDTO);
+        //System.out.println(programadorDTO.toString());
 
 
         ProgramadorDTO programadorDTO1 = ProgramadorDTO.builder()
@@ -261,15 +303,15 @@ public class AccesData {
                 .salario(2000)
                 .contraseña("1234")
                 .build();
-        programadorDTO1 = programadorController.postProgramador(programadorDTO1);
-        System.out.println(programadorDTO1);
+        ProgramadorDTO pr1 = programadorController.postProgramador(programadorDTO1);
+       // System.out.println(programadorDTO1.toString());
 
 
         System.out.println("UPDATE programador con ID:" + programadorDTO1.getId());
         Optional<ProgramadorDTO> optionalProgramadorDTO = programadorController.getProgramadorByIdOptional(programadorDTO1.getId());
         if (optionalProgramadorDTO.isPresent()) {
             optionalProgramadorDTO.get().setNombre("Programador actualizado");
-            System.out.println(programadorController.updateProgramador(optionalProgramadorDTO.get()));
+            System.out.println(programadorController.updateProgramador(optionalProgramadorDTO.get()).toString());
         }
 
 
@@ -277,7 +319,7 @@ public class AccesData {
         optionalProgramadorDTO = programadorController.getProgramadorByIdOptional(programadorDTO.getId());
         if (optionalProgramadorDTO.isPresent()) {
             System.out.println(optionalProgramadorDTO.get().toString());
-            System.out.println(programadorController.deleteProgramador(optionalProgramadorDTO.get()));
+            System.out.println(programadorController.deleteProgramador(optionalProgramadorDTO.get()).toString());
         }
 
 
@@ -292,33 +334,33 @@ public class AccesData {
 
         System.out.println("GET Todos los repositorios");
         List<RepositorioDTO> lista = repositorioController.getAllRepositorios();
-        System.out.println(lista);
+        System.out.println(lista.toString());
 
         System.out.println("GET repositorio con ID: " + lista.get(1).getId());
-        System.out.println(repositorioController.getRepositorioById(lista.get(1).getId()));
+        System.out.println(repositorioController.getRepositorioById(lista.get(1).getId()).toString());
 
 
         RepositorioDTO repositorioDTO = RepositorioDTO.builder()
                 .nombre("Nuevo repositorio")
                 .fecha_creacion(new Date(2010, 10, 22))
                 .build();
-        repositorioDTO = repositorioController.postRepositorio(repositorioDTO);
-        System.out.println(repositorioDTO);
+        RepositorioDTO re  = repositorioController.postRepositorio(repositorioDTO);
+       // System.out.println(repositorioDTO.toString());
 
 
         RepositorioDTO repositorioDTO1 = RepositorioDTO.builder()
                 .nombre("Nuevo repositorio 1")
                 .fecha_creacion(new Date(2010, 10, 22))
                 .build();
-        repositorioDTO1 = repositorioController.postRepositorio(repositorioDTO1);
-        System.out.println(repositorioDTO1);
+        RepositorioDTO re1 = repositorioController.postRepositorio(repositorioDTO1);
+        System.out.println(repositorioDTO1.toString());
 
 
         System.out.println("UPDATE repositorio con ID:" + repositorioDTO1.getId());
         Optional<RepositorioDTO> optionalRepositorioDTO = repositorioController.getRepositorioByIdOptional(repositorioDTO1.getId());
         if (optionalRepositorioDTO.isPresent()) {
             optionalRepositorioDTO.get().setNombre("Repositorio actualizado");
-            System.out.println(repositorioController.updateRepositorio(optionalRepositorioDTO.get()));
+            System.out.println(repositorioController.updateRepositorio(optionalRepositorioDTO.get()).toString());
         }
 
 
@@ -326,7 +368,7 @@ public class AccesData {
         optionalRepositorioDTO = repositorioController.getRepositorioByIdOptional(repositorioDTO.getId());
         if (optionalRepositorioDTO.isPresent()) {
             System.out.println(optionalRepositorioDTO.get().toString());
-            System.out.println(repositorioController.deleteRepositorio(optionalRepositorioDTO.get()));
+            System.out.println(repositorioController.deleteRepositorio(optionalRepositorioDTO.get()).toString());
         }
 
         System.out.println("FIN REPOSITORIOS");
@@ -340,10 +382,10 @@ public class AccesData {
 
         System.out.println("GET Todos los commits");
         List<CommitDTO> lista = commitController.getAllCommits();
-        System.out.println(lista);
+        System.out.println(lista.toString());
 
         System.out.println("GET commit con ID: " + lista.get(1).getId());
-        System.out.println(commitController.getCommitById(lista.get(1).getId()));
+        System.out.println(commitController.getCommitById(lista.get(1).getId()).toString());
 
 
         CommitDTO commitDTO = CommitDTO.builder()
@@ -354,22 +396,27 @@ public class AccesData {
                 .proyecto(pr2)
                 .autor(p2)
                 .build();
-        commitDTO = commitController.postCommit(commitDTO);
-        System.out.println(commitDTO);
+        CommitDTO c = commitController.postCommit(commitDTO);
+        System.out.println(commitDTO.toString());
 
 
         CommitDTO commitDTO1 = CommitDTO.builder()
-
+                .titulo ("Actualizacion clase CommitRepository")
+                .texto("Se actualizan los metodos crud de la clase REPO")
+                .fecha(new Date(2020, 10, 02))
+                .repositorio(r1)
+                .proyecto(pr2)
+                .autor(p2)
                 .build();
-        commitDTO1 = commitController.postCommit(commitDTO1);
-        System.out.println(commitDTO1);
+        CommitDTO c1 = commitController.postCommit(commitDTO1);
+        System.out.println(commitDTO1.toString());
 
 
         System.out.println("UPDATE commit con ID:" + commitDTO1.getId());
         Optional<CommitDTO> optionalCommitDTO = commitController.getCommitByIdOptional(commitDTO1.getId());
         if (optionalCommitDTO.isPresent()) {
             optionalCommitDTO.get().setTitulo("Commit actualizado");
-            System.out.println(commitController.updateCommit(optionalCommitDTO.get()));
+            System.out.println(commitController.updateCommit(optionalCommitDTO.get()).toString());
         }
 
 
@@ -377,7 +424,7 @@ public class AccesData {
         optionalCommitDTO = commitController.getCommitByIdOptional(commitDTO.getId());
         if (optionalCommitDTO.isPresent()) {
             System.out.println(optionalCommitDTO.get().toString());
-            System.out.println(commitController.deleteCommit(optionalCommitDTO.get()));
+            System.out.println(commitController.deleteCommit(optionalCommitDTO.get()).toString());
         }
 
 
@@ -392,10 +439,10 @@ public class AccesData {
 
         System.out.println("GET Todos los issues");
         List<IssueDTO> lista = issueController.getAllIssues();
-        System.out.println(lista);
+        System.out.println(lista.toString());
 
         System.out.println("GET issue con ID: " + lista.get(1).getId());
-        System.out.println(issueController.getIssueById(lista.get(1).getId()));
+        System.out.println(issueController.getIssueById(lista.get(1).getId()).toString());
 
 
         IssueDTO issueDTO = IssueDTO.builder()
@@ -407,22 +454,28 @@ public class AccesData {
                 .repositorio(r1)
                 .estado(Estado.PENDIENTE)
                 .build();
-        issueDTO = issueController.postIssue(issueDTO);
-        System.out.println(issueDTO);
+        IssueDTO i = issueController.postIssue(issueDTO);
+        System.out.println(issueDTO.toString());
 
 
         IssueDTO issueDTO1 = IssueDTO.builder()
-
+                .titulo("Problema clase commitRepo")
+                .texto("Bucle infinito en metodo edit")
+                .fecha(new Date(2020, 10, 02))
+                .programadores(new HashSet<Programador>(Arrays.asList(p1, p2)))
+                .proyecto(pr2)
+                .repositorio(r1)
+                .estado(Estado.PENDIENTE)
                 .build();
-        issueDTO1 = issueController.postIssue(issueDTO1);
-        System.out.println(issueDTO1);
+        IssueDTO i1 = issueController.postIssue(issueDTO1);
+        System.out.println(issueDTO1.toString());
 
 
         System.out.println("UPDATE issue con ID:" + issueDTO1.getId());
         Optional<IssueDTO> optionalIssueDTO = issueController.getIssuetByIdOptional(issueDTO1.getId());
         if (optionalIssueDTO.isPresent()) {
             optionalIssueDTO.get().setTitulo("Commit actualizado");
-            System.out.println(issueController.updateIssue(optionalIssueDTO.get()));
+            System.out.println(issueController.updateIssue(optionalIssueDTO.get()).toString());
         }
 
 
@@ -430,7 +483,7 @@ public class AccesData {
         optionalIssueDTO = issueController.getIssuetByIdOptional(issueDTO.getId());
         if (optionalIssueDTO.isPresent()) {
             System.out.println(optionalIssueDTO.get().toString());
-            System.out.println(issueController.deleteIssue(optionalIssueDTO.get()));
+            System.out.println(issueController.deleteIssue(optionalIssueDTO.get()).toString());
         }
 
 
