@@ -1,4 +1,8 @@
+import controller.DepartamentoController;
+import dto.DepartamentoDTO;
 import utils.ApplicationProperties;
+
+import java.util.List;
 
 public class App {
 
@@ -33,8 +37,9 @@ public class App {
         // Issues
         accesData.issues();
 
-        // Commits
-        // accesData.Comments();
+        DepartamentoController departamentoController = DepartamentoController.getInstance();
+        List<DepartamentoDTO> lista = departamentoController.getAllDepartamentos();
+        accesData.getProyectsByDepartment(((DepartamentoDTO)lista.get(0)).getId());
     }
 }
 
