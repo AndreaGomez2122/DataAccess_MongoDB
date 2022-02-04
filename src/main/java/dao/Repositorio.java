@@ -67,6 +67,8 @@ public class Repositorio {
     }
 
 
+
+    //Un repo solo tendrá un proyecto como se ha indicado antes
     @OneToOne
     @JoinColumn(name = "proyecto_id", referencedColumnName = "id", nullable = false)
     public Proyecto getProyecto() {
@@ -77,6 +79,7 @@ public class Repositorio {
         this.proyecto = proyecto;
     }
 
+    //Un repo puede tener muchos commits pero un commit solo se hace sobre un repositorio
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "repositorio", orphanRemoval = true, cascade = CascadeType.PERSIST)
     // Estudiar la cascada
@@ -88,6 +91,8 @@ public class Repositorio {
         this.commits = commits;
     }
 
+
+    //Un repo puede tener varias issues pero una issue es sobre un solo repo
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "repositorio", orphanRemoval = true, cascade = CascadeType.PERSIST)
     // Estudiar la cascada
     public Set<Issue> getIssues() {

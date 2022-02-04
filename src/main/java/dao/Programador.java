@@ -15,10 +15,8 @@ import java.util.*;
 // Todos los programadores
 @NamedQueries({
         @NamedQuery(name = "Programador.findAll", query = "SELECT p FROM Programador p"),
-        // Todos los usuarios con id indicados, ojo, no usar parámetros
         @NamedQuery(name = "Programador.getById", query = "SELECT p FROM Programador p WHERE p.id = :id"),
-        // Todos los post de un usuario
-       // @NamedQuery(name = "User.getMyPosts", query = "SELECT u.p FROM Programador u WHERE u.id = :userId")
+
 })
 public class Programador {
     private ObjectId id;
@@ -77,6 +75,8 @@ public class Programador {
     }
 
 
+    //Un programador solo pertenece a un dep mientras que un dep tiene muchos programadores.
+
     @ManyToOne
     @JoinColumn(name = "departamento_id", referencedColumnName = "id", nullable = false)
     public Departamento getDepartamento() {
@@ -87,6 +87,7 @@ public class Programador {
         this.departamento = departamento;
     }
 
+   // Un proyecto solo tiene un programador(jefe) mientras que un programador puede pertenecer a muchos proyectos
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "jefe", orphanRemoval = true, cascade = CascadeType.PERSIST) // Estudiar la cascada
     public Set<Proyecto> getProyectos() {
         return proyectos;
@@ -96,7 +97,7 @@ public class Programador {
         this.proyectos = proyectos;
     }
 
-
+    //Un programador puede hacer una gran cantidad de commits y un commit solo pertenecerá a un programador
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "autor", orphanRemoval = true, cascade = CascadeType.PERSIST) // Estudiar la cascada
     public Set<Commit> getCommits() {
         return commits;

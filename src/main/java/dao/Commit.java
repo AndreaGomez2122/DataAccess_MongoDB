@@ -79,6 +79,7 @@ public class Commit {
     }
 
 
+    //Un commit se puede hacer sobre un solo repositorio y un repositorio puede tener muchos commits
     @ManyToOne
     @JoinColumn(name = "repositorio_id", referencedColumnName = "id", nullable = false)
     public Repositorio getRepositorio() {
@@ -90,6 +91,7 @@ public class Commit {
     }
 
 
+    //Lo mismo
     @ManyToOne
     @JoinColumn(name = "proyecto_id", referencedColumnName = "id", nullable = false)
     public Proyecto getProyecto() {
@@ -101,6 +103,7 @@ public class Commit {
     }
 
 
+    //Lo mismo
     @ManyToOne
     @JoinColumn(name = "autor_id", referencedColumnName = "id", nullable = false)
     public Programador getAutor() {

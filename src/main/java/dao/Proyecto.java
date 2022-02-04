@@ -70,7 +70,7 @@ public class Proyecto {
     }
 
 
-    //El jefe no puede participar en ningun proyecto ni ser jefe del departamento
+    //Un proyecto solo tiene un jefe pero un programador puede pertenecer a varios proyectos
     @ManyToOne
     @JoinColumn(name = "jefe_id", referencedColumnName = "id", nullable = false)
     public Programador getJefe() {
@@ -114,6 +114,7 @@ public class Proyecto {
     //@OneToMany(fetch = FetchType.EAGER, mappedBy = "programador", orphanRemoval = true, cascade = CascadeType.PERSIST) // Estudiar la cascada
     @Enumerated(EnumType.STRING)
     @ElementCollection
+    @Column(name="tecnologias", nullable = true)
     public Set<Tecnologia> getTecnologias() {
         return tecnologias;
     }
@@ -122,6 +123,9 @@ public class Proyecto {
         this.tecnologias = tecnologias;
     }
 
+
+
+    //Un proyecto solo pertenece a un departamento pero un dep puede tener muchos proyectos
     @ManyToOne
     @JoinColumn(name = "departamento_id", referencedColumnName = "id", nullable = false)
     public Departamento getDepartamento() {
@@ -132,6 +136,8 @@ public class Proyecto {
         this.departamento = departamento;
     }
 
+
+    //Un proyecto solo pertenece a un repositorio, y un repo solo tendrá un proyecto
     @OneToOne
     @JoinColumn(name = "repositorio_id",referencedColumnName = "id", nullable = true)
     public Repositorio getRepositorio() {

@@ -27,13 +27,14 @@ public class Issue {
     private Repositorio repositorio;
     private Estado estado;
 
-    public Issue(String titulo, String texto, Date fecha, Proyecto proyecto, Repositorio repositorio, Estado estado) {
+    public Issue(String titulo, String texto, Date fecha, Proyecto proyecto, Repositorio repositorio, Estado estado, Set<Programador>programadores) {
         this.titulo = titulo;
         this.texto = texto;
         this.fecha = fecha;
         this.proyecto = proyecto;
         this.repositorio = repositorio;
         this.estado = estado;
+        this.programadores = programadores;
 
 
     }
@@ -82,6 +83,7 @@ public class Issue {
     }
 
 
+    //Una issue puede pertenecer a un solo proyecto y un proyecto puede tener muchas issues
     @ManyToOne
     @JoinColumn(name = "proyecto_id", referencedColumnName = "id", nullable = false)
     public Proyecto getProyecto() {
@@ -91,6 +93,7 @@ public class Issue {
     public void setProyecto(Proyecto proyecto) {
         this.proyecto = proyecto;
     }
+
 
 
     @ManyToOne
@@ -104,7 +107,9 @@ public class Issue {
     }
 
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}) // cascade = CascadeType.ALL
+
+    //Una issue puede pertenecer a muchos programadores y un programador puede tener muchas issues
+    @ManyToMany(fetch = FetchType.EAGER)
     public Set<Programador> getProgramadores() {
         return programadores;
     }

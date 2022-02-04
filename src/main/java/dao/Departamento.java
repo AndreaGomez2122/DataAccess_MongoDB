@@ -14,10 +14,9 @@ import java.util.Set;
 // Consulta para obtener todos
 @NamedQueries({
         @NamedQuery(name = "Departamento.findAll", query = "SELECT d FROM Departamento d"),
-        // Consulta para obtener todos los departamentos dado el id de un usuario
-        //@NamedQuery(name = "Departamento.getByUserId", query = "SELECT p FROM Post p WHERE p.user.id = :userId"),
+
 })
-@Table(name = "departamento") // Ojo con la minuscula que en la tabla está así
+@Table(name = "departamento")
 public class Departamento {
     private ObjectId id;
     private String nombre;
@@ -59,8 +58,8 @@ public class Departamento {
     }
 
 
-    //El jefe no puede participar en ningun proyecto
-    @ManyToOne
+
+    @ManyToOne //un programador solo lo será de un departamento pero un departamento podrá tener muchos programadores
     @JoinColumn(name = "jefe_id", referencedColumnName = "id", nullable = true)
     public Programador getJefe() {
         return jefe;
@@ -81,6 +80,7 @@ public class Departamento {
     }
 
 
+    //Un proyecto solo pertenecerá a un departamento pero un dep tendra muchos proyectos
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "departamento", orphanRemoval = true, cascade = CascadeType.MERGE)
     public Set<Proyecto> getProyectos_terminados() {
         return proyectos_terminados;
@@ -90,6 +90,7 @@ public class Departamento {
         this.proyectos_terminados = proyectos_terminados;
     }
 
+    //Un proyecto solo pertenecerá a un departamento pero un dep tendra muchos proyectos
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "departamento", orphanRemoval = true, cascade = CascadeType.MERGE)
     public Set<Proyecto> getProyectos_activos() {
         return proyectos_activos;
@@ -99,6 +100,9 @@ public class Departamento {
         this.proyectos_activos = proyectos_activos;
     }
 
+
+
+    //Un dep tendra muchos jefes pero un jefe solo lo será de un departamento
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "departamento", orphanRemoval = true, cascade = CascadeType.MERGE)
     public Set<Programador> getHistorico_jefes() {
         return historico_jefes;

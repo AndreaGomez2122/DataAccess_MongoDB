@@ -31,6 +31,7 @@ public class ProyectoMapper extends BaseMapper<Proyecto, ProyectoDTO> {
                 .fecha_inicio(item.getFecha_inicio())
                 .presupuesto(item.getPresupuesto())
                 .repositorio(item.getRepositorio())
-                .tecnologias(item.getTecnologias()).build();
+                .build();
+                //.tecnologias(item.getTecnologias()).build();
     }
 }

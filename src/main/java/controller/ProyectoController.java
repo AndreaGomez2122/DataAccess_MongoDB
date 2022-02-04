@@ -1,5 +1,6 @@
 package controller;
 
+import dao.Proyecto;
 import dto.DepartamentoDTO;
 import dto.ProgramadorDTO;
 import dto.ProyectoDTO;
@@ -85,17 +86,21 @@ public class ProyectoController {
 
 
     //GET ALL PROGRAMADORES BY PROYECTO
-    public Set<ProgramadorDTO> getProgramadorsByProject(ObjectId idProyecto) {
+    public Set<String> getProgramadorsByProject(ObjectId idProyecto) {
         ProgramadorController p = ProgramadorController.getInstance();
         ProyectoController proyectoController = ProyectoController.getInstance();
+
         List<ProgramadorDTO> pr = p.getAllProgramadors();
-        Set<ProgramadorDTO> programadores =new HashSet<>();
+        Set<String> programadores =new HashSet<>();
         ProyectoDTO proyectoDTO = proyectoController.getProyectoById(idProyecto);
         for (ProgramadorDTO programadorDTO:pr
              ) {
+            for (Proyecto pro:programadorDTO.getProyectos()
+                 ) {
+                if(pro.getId().equals(idProyecto)){
+                    programadores.add(programadorDTO.getNombre());
+                }
 
-            if(programadorDTO.getProyectos().contains(proyectoDTO)){
-                programadores.add(programadorDTO);
             }
 
         }

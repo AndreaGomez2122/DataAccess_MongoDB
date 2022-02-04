@@ -1,7 +1,15 @@
 package mapper;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import dao.Departamento;
 import dto.DepartamentoDTO;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class DepartamentoMapper extends BaseMapper<Departamento, DepartamentoDTO> {
@@ -30,5 +38,20 @@ public class DepartamentoMapper extends BaseMapper<Departamento, DepartamentoDTO
                 .proyectos_activos(item.getProyectos_activos())
                 .proyectos_terminados(item.getProyectos_terminados())
                 .presupuesto(item.getPresupuesto()).build();
+    }
+
+
+    public String toJson(List<DepartamentoDTO> departamentos) throws IOException {
+
+        Gson g = new GsonBuilder().setPrettyPrinting().create();
+        String json = g.toJson(departamentos);
+        //Creamos el archivo como se pide en la práctica
+        FileWriter fileWriter = new FileWriter(System.getProperty("user.dir")+ File.separator+ "src" + File.separator + "main"+
+                File.separator+"java" + File.separator + "AllDepartments.json");
+        fileWriter.write(json);
+        fileWriter.flush();
+        fileWriter.close();
+        return json;
+
     }
 }

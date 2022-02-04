@@ -11,6 +11,7 @@ import repository.DepartamentoRepository;
 import service.DepartamentoService;
 
 import java.sql.SQLException;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -94,8 +95,9 @@ public class DepartamentoController {
 
     public Set<Proyecto>getProyectsByDepartment(ObjectId id){
         //Devuelve lista de proyectosDTO que incorpora una lista de programadores
-        Set<Proyecto> listaProyectos;
-        return listaProyectos= getDepartamentoById(id).getProyectos_activos();
+        Set<Proyecto> listaProyectos = new HashSet<>();
+        listaProyectos.addAll(getDepartamentoById(id).getProyectos_activos());
+        return listaProyectos;
 
     }
 

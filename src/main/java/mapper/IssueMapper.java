@@ -12,6 +12,7 @@ public class IssueMapper extends BaseMapper<Issue, IssueDTO> {
         issue.setFecha(item.getFecha());
         issue.setProyecto(item.getProyecto());
         issue.setProgramadores(item.getProgramadores());
+        issue.setRepositorio(item.getRepositorio());
         issue.setTexto(item.getTexto());
         return issue;
     }
@@ -19,11 +20,12 @@ public class IssueMapper extends BaseMapper<Issue, IssueDTO> {
     @Override
     public IssueDTO toDTO(Issue item) {
         return IssueDTO.builder()
-        .id(item.getId())
-        .titulo(item.getTitulo())
-        .fecha(item.getFecha())
-        .proyecto(item.getProyecto())
-        .programadores(item.getProgramadores())
-        .texto(item.getTexto()).build();
+                .id(item.getId())
+                .titulo(item.getTitulo())
+                .fecha(item.getFecha())
+                .proyecto(item.getProyecto())
+                .programadores(item.getProgramadores())
+                .repositorio(item.getRepositorio())
+                .texto(item.getTexto()).build();
     }
 }

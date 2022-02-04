@@ -31,8 +31,8 @@ public class ProgramadorDTO {
                 ", departamento=" + departamento.getNombre() +
                 ", proyectos=" + proyectos.stream().map(Proyecto::getNombre) +
                 ", commits=" + commits.stream().map(Commit::getId) +
-                ", issues=" + issues.stream().map(Issue::getId) +
-                ", tecnologias=" + tecnologias +
+                //", issues=" + issues.stream().map(Issue::getId) +
+                //", tecnologias=" + tecnologias +
                 ", salario=" + salario + '\'' +
                 '}';
     }
