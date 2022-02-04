@@ -43,3 +43,15 @@ Una vez que el programa se haya ejecutado se habrá creado un volumen con dos im
 Sólo se debe introducir localhost:8081 en el navegador y tendrás una vista de la base de datos.
 
 ![bdcompass](https://user-images.githubusercontent.com/80425131/152405619-8c615bfe-6959-4eb5-bb00-415a99bba77e.png)
+
+
+
+
+
+
+### LINKS VIDEOS PRESENTACION
+
+https://youtu.be/amLYZABwu7g
+
+
+
